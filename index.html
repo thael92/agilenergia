@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title id="page-title">Ágil Energia — Gás do Futuro</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity=""
+        crossorigin="anonymous" />
+
+    <style>
+        :root {
+            --p1: #7404BF;
+            /* accent */
+            --p2: #6708A6;
+            --p3: #4A0E73;
+            --p4: #3E1559;
+            --accent: #F2A341;
+            --bg: #fbfbfd;
+            --card: #ffffff;
+            --muted: #6b6b78;
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-strong: rgba(255, 255, 255, 0.92);
+            --max-width: 1200px;
+            --ease: cubic-bezier(.2, .9, .2, 1);
+        }
+
+        /* Reset & base */
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+            background: var(--bg);
+            color: #222;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            /* FIX: Oculta a barra de rolagem horizontal causada por elementos que se estendem para fora */
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        img {
+            max-width: 100%;
+            display: block
+        }
+
+        /* Pattern full-page (using the user's energy pattern image) */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background:
+                linear-gradient(180deg, rgba(62, 21, 89, 0.06), rgba(116, 4, 191, 0.04));
+            pointer-events: none;
+        }
+
+        /* left side decorative pattern */
+        .side-pattern {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 160px;
+            z-index: -2;
+            background: url('img/pattern-side.jpg') repeat-y center left/160px auto;
+            opacity: 0.14;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            inset: 0 0 auto 0;
+            height: 74px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, var(--p3), var(--p1));
+            color: white;
+            padding: 0 0.75rem;
+            z-index: 1400;
+            transition: all .25s var(--ease);
+            box-shadow: 0 6px 30px rgba(12, 8, 20, 0.12);
+            backdrop-filter: blur(6px);
+        }
+
+        header.shrink {
+            height: 60px;
+            box-shadow: 0 10px 40px rgba(12, 8, 20, 0.14)
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 12px;
+            position: relative; /* Adicionado para posicionamento absoluto do menu */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1500; /* Z-index alto para ficar acima do menu centralizado */
+        }
+
+        .logo img {
+            height: 42px
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.3px;
+            background: linear-gradient(90deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        /* nav - Centralização */
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            /* Novas regras para centralizar no desktop */
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000; /* Abaixo do logo e controles */
+        }
+
+        .nav a {
+            color: #fff;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            opacity: 0.98;
+            transition: all .18s
+        }
+
+        .nav a:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.05)
+        }
+
+        /* Controles - Agrupamento e Z-index */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 1500;
+        }
+
+        .btn-lang {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 7px 10px;
+            border-radius: 9px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        /* hamburger & mobile nav */
+        .menu-toggle {
+            display: none;
+            border: 0;
+            background: transparent;
+            color: #fff;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        .menu-toggle .bar {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: #fff;
+            margin: 4px 0;
+            transition: transform .28s, opacity .2s;
+            transform-origin: center;
+        }
+
+        /* NOVO: estado "open" transforma barras em X */
+        .menu-toggle.open .bar:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .menu-toggle.open .bar:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .menu-toggle.open .bar:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .menu-panel {
+            display: flex;
+            gap: 12px
+        }
+
+        /* Close button inside mobile panel (top-right) */
+        .menu-panel .panel-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: transparent;
+            border: 0;
+            color: #fff;
+            font-size: 20px;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1460;
+            display: none;
+        }
+
+        .menu-panel.show .panel-close {
+            display: block;
+        }
+
+        /* hero */
+        .hero {
+            min-height: 84vh;
+            background-image: url('img/hero-energia.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 74px;
+            overflow: hidden;
+        }
+
+        /* PELÍCULA SUTIL para melhorar leitura do texto sobre a imagem */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            /* camada escura leve — aumenta contraste do texto */
+            background: linear-gradient(180deg, rgba(6, 6, 12, 0.28), rgba(6, 6, 12, 0.20));
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            /* mantém o gradiente atual animado por cima da película */
+            background: linear-gradient(120deg, rgba(62, 21, 89, 0.6), rgba(116, 4, 191, 0.45) 55%, rgba(242, 163, 65, 0.06));
+            mix-blend-mode: multiply;
+            z-index: 2;
+            animation: gradMove 14s linear infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: #fff;
+            max-width: 980px;
+            padding: 48px 20px
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.04;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, #fff, #F2A341);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 1.125rem;
+            margin-top: 14px;
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        /* future banner */
+        .future-banner {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 42px 0;
+            background-image: url('img/future-energia.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative
+        }
+
+        .future-banner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(62, 21, 89, 0.72), rgba(116, 4, 191, 0.4));
+            mix-blend-mode: multiply;
+            z-index: 1
+        }
+
+        .future-inner {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            padding: 60px;
+            max-width: 560px;
+            text-align: right
+        }
+
+        .future-inner h2 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        .future-inner p {
+            color: rgba(255, 255, 255, 0.95);
+            margin-top: 10px
+        }
+
+        /* sections (glass cards) */
+        main {
+            padding: 28px 0 80px
+        }
+
+        section {
+            margin: 28px 0;
+            padding: 42px 0;
+            border-radius: 14px;
+            position: relative;
+            overflow: visible
+        }
+
+        .card {
+            background: linear-gradient(180deg, var(--glass-strong), rgba(255, 255, 255, 0.86));
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 18px 40px rgba(74, 14, 115, 0.06);
+            border: 1px solid rgba(116, 4, 191, 0.06)
+        }
+
+        h2.section-title {
+            text-align: center;
+            color: var(--p3);
+            margin-bottom: 18px;
+            font-size: 1.9rem
+        }
+
+        .content-text {
+            max-width: 1000px;
+            margin: 0 auto;
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 1.02rem
+        }
+
+        .content-text p {
+            margin-bottom: 1.25rem;
+            color: #333
+        }
+
+        /* values & team grids */
+        .values-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            margin-top: 20px
+        }
+
+        .value {
+            position: relative;
+            padding: 18px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #fff, #f7f6fb);
+            box-shadow: 0 10px 30px rgba(74, 14, 115, 0.04);
+            border-left: 4px solid var(--p1)
+        }
+
+        .value h3 {
+            margin: 0 0 8px 0;
+            color: var(--p3)
+        }
+
+        .team-grid {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            margin-top: 18px
+        }
+
+        .member {
+            padding: 18px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #fff, #fbfbff);
+            box-shadow: 0 12px 36px rgba(74, 14, 115, 0.05)
+        }
+
+        /* news */
+        .news-list {
+            max-width: 980px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .news-item {
+            padding: 14px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #fff, #f8f8fb);
+            border-left: 4px solid var(--p1)
+        }
+
+        /* footer */
+        footer {
+            background: linear-gradient(135deg, var(--p4), var(--p3));
+            color: #fff;
+            padding: 38px 0;
+            margin-top: 28px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+        }
+
+        /* reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px) scale(.995);
+            transition: opacity .7s var(--ease), transform .7s var(--ease)
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        /* floating whatsapp */
+        .whatsapp {
+            position: fixed;
+            right: 20px;
+            bottom: 22px;
+            background: linear-gradient(180deg, var(--accent), #e28a1a);
+            color: #fff;
+            padding: 14px 16px;
+            border-radius: 999px;
+            box-shadow: 0 10px 30px rgba(18, 10, 40, 0.18);
+            z-index: 1500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 0;
+        }
+
+        .whatsapp .icon {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 8px;
+            border-radius: 8px
+        }
+
+        /* small helpers */
+        .muted {
+            color: var(--muted);
+            font-size: 0.96rem
+        }
+
+        .link-ghost {
+            color: var(--p1);
+            font-weight: 700
+        }
+
+        /* ===== GÁS NATURAL — nova seção (CSS) ===== */
+        .gas-section {
+            position: relative;
+            padding: 44px 0;
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(250, 250, 253, 0.98));
+            box-shadow: 0 18px 40px rgba(74, 14, 115, 0.04);
+            overflow: visible;
+        }
+
+        .gas-inner {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 28px;
+            align-items: start;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 12px 20px;
+        }
+
+        .gas-intro h2 {
+            margin: 0 0 12px 0;
+            color: var(--p3);
+            font-size: 1.8rem;
+        }
+
+        .gas-intro p.lead {
+            font-size: 1.05rem;
+            color: #222;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .gas-intro p.meta {
+            color: var(--muted);
+            font-size: 0.96rem;
+            margin-bottom: 18px;
+        }
+
+        .gas-features {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .gas-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 12px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #fff, #fbfbff);
+            box-shadow: 0 8px 26px rgba(74, 14, 115, 0.04);
+            border: 1px solid rgba(116, 4, 191, 0.04);
+        }
+
+        .gas-item .icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, var(--p1), var(--p2));
+            color: #fff;
+            font-size: 18px;
+            flex: 0 0 44px;
+        }
+
+        .gas-item h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--p3);
+        }
+
+        .gas-item p {
+            margin: 4px 0 0 0;
+            color: var(--muted);
+            font-size: 0.95rem
+        }
+
+        /* Video card */
+        .gas-video {
+            background: linear-gradient(180deg, #0f0520 0%, rgba(74, 14, 115, 0.95) 100%);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: #fff;
+        }
+
+        .video-thumb {
+            width: 100%;
+            height: 220px;
+            border-radius: 10px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-play {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, var(--accent), #e28a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(18, 10, 40, 0.2);
+            cursor: pointer;
+            border: 0;
+        }
+
+        .video-caption {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+
+        /* Modal for video */
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(2, 6, 23, 0.7);
+            z-index: 2000;
+            padding: 24px;
+        }
+
+        .video-modal .frame {
+            width: min(1100px, 95%);
+            height: min(620px, 60%);
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video-modal .close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 0;
+            color: #fff;
+            padding: 8px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* subtle gas watermark across main sections */
+        #home::before,
+        #team::before,
+        #future::before,
+        #ethics::before,
+        #news::before {
+            content: "Gás Natural Onshore — Energia que move o futuro";
+            position: absolute;
+            right: 18px;
+            top: 10px;
+            transform: rotate(-12deg);
+            opacity: 0.06;
+            font-weight: 800;
+            color: var(--p3);
+            font-size: clamp(12px, 2.2vw, 18px);
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 0.6px;
+        }
+
+        /* responsiveness */
+        @media (max-width:900px) {
+            .hero h1 {
+                font-size: 2.2rem
+            }
+
+            .hero p {
+                font-size: 1rem
+            }
+
+            .future-inner {
+                text-align: center;
+                padding: 28px
+            }
+
+            .future-banner {
+                justify-content: center
+            }
+
+            .side-pattern {
+                width: 110px;
+                background-size: 110px auto;
+                opacity: 0.12
+            }
+        }
+
+        @media (max-width:768px) {
+            /* Regras de mobile: Desativa centralização do menu desktop */
+            .nav {
+                display: none;
+                position: static;
+                transform: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                /* Removi a posição 'left: 65px' pois a nova estrutura do header já centraliza os botões corretamente */
+            }
+
+            .menu-panel {
+                position: fixed;
+                right: -110%;
+                top: 0;
+                height: 100vh;
+                width: 78%;
+                background: linear-gradient(180deg, var(--p3), var(--p1));
+                padding: 86px 18px;
+                gap: 18px;
+                display: flex;
+                flex-direction: column;
+                z-index: 1450;
+                transition: right .36s var(--ease)
+            }
+
+            .menu-panel.show {
+                right: 0
+            }
+
+            .menu-panel a {
+                color: #fff;
+                padding: 12px;
+                border-radius: 10px
+            }
+
+            /* Esconde o botão de idioma de desktop */
+            #lang-desktop {
+                display: none;
+            }
+
+            /* Mostra o botão de idioma mobile (dentro de header-controls) */
+            .mobile-lang {
+                display: inline-block !important;
+                background: transparent;
+                border: 1px solid rgba(255, 255, 255, 0.14);
+                color: #fff;
+                padding: 8px 10px;
+                border-radius: 9px
+            }
+
+            .header-inner {
+                padding: 0 12px
+            }
+
+            .hero {
+                /* melhor foco em telas pequenas: posiciona o ponto focal mais acima e dá um leve "zoom" */
+                background-position: center top;
+                background-size: 120% auto;
+                min-height: 64vh; /* suaviza altura no breakpoint */
+            }
+
+            .hero::before {
+                /* aumenta um pouco a película em telas pequenas para garantir contraste */
+                background: linear-gradient(180deg, rgba(6,6,12,0.40), rgba(6,6,12,0.26));
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-panel {
+                position: fixed;
+                right: -110%;
+                top: 0;
+                height: 100vh;
+                width: 78%;
+                background: linear-gradient(180deg, var(--p3), var(--p1));
+                padding: 86px 18px;
+                gap: 18px;
+                display: flex;
+                flex-direction: column;
+                z-index: 1450;
+                transition: right .36s var(--ease)
+            }
+
+            .menu-panel.show {
+                right: 0
+            }
+
+            .menu-panel a {
+                color: #fff;
+                padding: 12px;
+                border-radius: 10px
+            }
+
+            /* Esconde o botão de idioma de desktop */
+            #lang-desktop {
+                display: none;
+            }
+
+            /* Mostra o botão de idioma mobile (dentro de header-controls) */
+            .mobile-lang {
+                display: inline-block !important;
+                background: transparent;
+                border: 1px solid rgba(255, 255, 255, 0.14);
+                color: #fff;
+                padding: 8px 10px;
+                border-radius: 9px
+            }
+
+            .header-inner {
+                padding: 0 12px
+            }
+
+            .hero {
+                /* melhor foco em telas pequenas: posiciona o ponto focal mais acima e dá um leve "zoom" */
+                background-position: center top;
+                background-size: 120% auto;
+                min-height: 64vh; /* suaviza altura no breakpoint */
+            }
+
+            .hero::before {
+                /* aumenta um pouco a película em telas pequenas para garantir contraste */
+                background: linear-gradient(180deg, rgba(6,6,12,0.40), rgba(6,6,12,0.26));
+            }
+        }
+
+        /* decorative rectangles with 'ativo-padrao' inside sections */
+        section {
+            position: relative;
+            /* ensure pseudo is positioned relative to section */
+            overflow: visible;
+        }
+
+        /* base decorative box */
+        section::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 160px;
+            border-radius: 14px;
+            background-color: rgba(255, 255, 255, 0.85);
+            background-image: url('img/ativo-padrao.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 62%;
+            box-shadow: 0 18px 40px rgba(74, 14, 115, 0.08);
+            opacity: 0.10;
+            transform: rotate(-6deg);
+            right: -40px;
+            top: 28px;
+            z-index: 0;
+            pointer-events: none;
+            transition: transform .6s var(--ease), opacity .45s var(--ease);
+            will-change: transform, opacity;
+        }
+
+        /* alternate placement on even sections */
+        section:nth-of-type(even)::after {
+            left: -40px;
+            right: auto;
+            transform: rotate(6deg);
+            background-size: 60%;
+            opacity: 0.10;
+        }
+
+        /* smaller decorative box on smaller screens (avoid overlap) */
+        @media (max-width: 900px) {
+            section::after {
+                width: 200px;
+                height: 120px;
+                right: -18px;
+                top: 14px;
+                background-size: 58%;
+                opacity: 0.08;
+                transform: rotate(-4deg);
+            }
+
+            section:nth-of-type(even)::after {
+                left: -18px;
+                transform: rotate(4deg);
+            }
+        }
+
+        /* hide on very small screens to preserve reading area */
+        @media (max-width: 520px) {
+            section::after {
+                display: none
+            }
+        }
+
+        /* subtle float animation when section becomes visible */
+        @keyframes decoFloat {
+            0% {
+                transform: translateY(0) rotate(-6deg)
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(-6.5deg)
+            }
+
+            100% {
+                transform: translateY(0) rotate(-6deg)
+            }
+        }
+
+        .reveal.visible::after {
+            animation: decoFloat 6s ease-in-out infinite;
+            opacity: 0.12;
+        }
+
+        /* ensure content sits above decoration */
+        section .card,
+        section .container,
+        section>.container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* LEFT COLUMN: repeated ativo-padrao image between "Quem Somos" and "NEWS" */
+        /* Primary column (closest to left edge) */
+        .side-column {
+            position: absolute;
+            left: 8px;
+            /* distance from left edge - adjust if needed */
+            width: 140px;
+            /* column width */
+            pointer-events: none;
+            z-index: -1;
+            /* behind content (.card/.container have z-index:2) */
+            opacity: 0.14;
+            background-image: url('img/ativo-padrao.png');
+            background-repeat: repeat-y;
+            background-position: center top;
+            background-size: 120px auto;
+            /* size of each logo in column */
+            box-shadow: 0 12px 30px rgba(74, 14, 115, 0.06);
+            transition: opacity .35s ease, transform .6s ease;
+            will-change: transform, top, height;
+            display: block;
+        }
+
+        /* Secondary column (to the right of the primary column) */
+        .side-column--2 {
+            position: absolute;
+            left: 164px;
+            /* positions second column next to first */
+            width: 140px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.12;
+            background-image: url('img/ativo-padrao.png');
+            background-repeat: repeat-y;
+            background-position: center top;
+            background-size: 110px auto;
+            transform: scaleX(0.98) rotate(2deg);
+            box-shadow: 0 10px 24px rgba(74, 14, 115, 0.05);
+            transition: opacity .35s ease, transform .6s ease;
+            will-change: transform, top, height;
+            display: block;
+        }
+
+        /* Responsive adjustments: keep visible but smaller and less intrusive */
+        @media (max-width:900px) {
+            .side-column {
+                left: 8px;
+                width: 96px;
+                background-size: 72px auto;
+                opacity: 0.11;
+                box-shadow: none;
+            }
+
+            .side-column--2 {
+                left: 110px;
+                width: 96px;
+                background-size: 72px auto;
+                opacity: 0.10;
+                transform: scaleX(0.99) rotate(1.5deg);
+                box-shadow: none;
+            }
+        }
+
+        /* Very small screens: keep pattern but reduce footprint and avoid blocking content */
+        @media (max-width:420px) {
+            .side-column {
+                left: 6px;
+                width: 64px;
+                background-size: 48px auto;
+                opacity: 0.10;
+            }
+
+            .side-column--2 {
+                left: 74px;
+                width: 64px;
+                background-size: 48px auto;
+                opacity: 0.09;
+                transform: scaleX(0.99) rotate(0.8deg);
+            }
+
+            /* Small nudge so column doesn't overlap primary content / header controls */
+            .container {
+                padding-left: calc(20px + 76px);
+            }
+
+            /* ajuste fino conforme necessário */
+            header .header-inner {
+                padding-left: calc(12px + 76px);
+            }
+        }
+
+        /* ensure columns remain non-interactive on all sizes */
+        .side-column,
+        .side-column--2 {
+            pointer-events: none;
+            mix-blend-mode: multiply
+        }
+
+        /* Large desktops: subtle scale up and more breathing room */
+        @media (min-width: 1400px) {
+            :root {
+                --max-width: 1280px;
+            }
+
+            .container {
+                padding-left: 28px;
+                padding-right: 28px;
+            }
+
+            .hero h1 {
+                font-size: 3.6rem;
+            }
+
+            .future-inner {
+                padding: 84px;
+            }
+
+            .gas-inner {
+                grid-template-columns: 1fr 520px;
+                gap: 36px;
+            }
+
+            .side-column {
+                left: 12px;
+                width: 150px;
+                background-size: 130px auto;
+                opacity: 0.16;
+            }
+
+            .side-column--2 {
+                left: 176px;
+                width: 150px;
+                background-size: 120px auto;
+                opacity: 0.14;
+            }
+        }
+
+        /* Desktop / large tablet */
+        @media (min-width: 992px) and (max-width: 1399px) {
+            .container {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .gas-inner {
+                grid-template-columns: 1fr 460px;
+                gap: 28px;
+            }
+
+            .future-inner {
+                padding: 64px;
+            }
+
+            .side-column {
+                left: 10px;
+                width: 140px;
+                background-size: 120px auto;
+            }
+
+            .side-column--2 {
+                left: 164px;
+                width: 140px;
+                background-size: 110px auto;
+            }
+        }
+
+        /* Tablet landscape / small desktop */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            header {
+                height: 70px;
+            }
+
+            header.shrink {
+                height: 56px;
+            }
+
+            .hero {
+                padding-top: 70px;
+            }
+
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+
+            .hero p {
+                font-size: 1.03rem;
+            }
+
+            .gas-inner {
+                grid-template-columns: 1fr 360px;
+                gap: 20px;
+            }
+
+            .video-thumb {
+                height: 200px;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+
+            .side-column {
+                left: 8px;
+                width: 110px;
+                background-size: 88px auto;
+                opacity: 0.13;
+            }
+
+            .side-column--2 {
+                left: 126px;
+                width: 110px;
+                background-size: 82px auto;
+                opacity: 0.11;
+            }
+        }
+
+        /* Mobile / tablet portrait */
+        @media (max-width: 767px) {
+
+            /* show hamburger, hide desktop nav (existing rules already do that) */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* header spacing to avoid overlap with side columns */
+            .container {
+                padding-left: calc(20px + 92px);
+                padding-right: 20px;
+            }
+
+            header .header-inner {
+                padding-left: calc(12px + 92px);
+            }
+
+            /* hero adjustments */
+            .hero {
+                min-height: 64vh;
+                padding-top: 66px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+                line-height: 1.08;
+                margin-bottom: 8px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            /* gas section stack and video first */
+            .gas-inner {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding: 8px 14px;
+            }
+
+            .gas-video {
+                order: -1;
+            }
+
+            .video-thumb {
+                height: 180px;
+                border-radius: 10px;
+            }
+
+            /* values, team, news stack */
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .news-list {
+                gap: 10px;
+                padding: 0 6px;
+            }
+
+            /* reduce decorative rects */
+            section::after {
+                width: 180px;
+                height: 100px;
+                top: 12px;
+                right: -12px;
+                background-size: 56%;
+                opacity: 0.06;
+                transform: rotate(-3.5deg);
+            }
+
+            section:nth-of-type(even)::after {
+                left: -12px;
+                transform: rotate(3.5deg);
+            }
+
+            /* keep side columns visible but compact */
+            .side-column {
+                left: 6px;
+                width: 72px;
+                background-size: 48px auto;
+                opacity: 0.10;
+            }
+
+            .side-column--2 {
+                left: 86px;
+                width: 72px;
+                background-size: 48px auto;
+                opacity: 0.09;
+                transform: scaleX(0.99) rotate(0.8deg);
+            }
+
+            /* floating whatsapp slight resize for small screens */
+            .whatsapp {
+                right: 12px;
+                bottom: 14px;
+                padding: 10px 12px;
+                font-size: 0.95rem;
+            }
+
+            .whatsapp .icon {
+                padding: 6px;
+            }
+
+            /* mobile menu panel tweak */
+            .menu-panel {
+                width: 86%;
+                padding: 84px 18px;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 420px) {
+            .container {
+                padding-left: calc(16px + 72px);
+                padding-right: 12px;
+            }
+
+            header .header-inner {
+                padding-left: calc(10px + 72px);
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .video-thumb {
+                height: 140px;
+            }
+
+            .video-play {
+                width: 56px;
+                height: 56px;
+                font-size: 18px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gas-item {
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .gas-item .icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            /* decorative sections kept but very subtle */
+            section::after {
+                display: block;
+                width: 150px;
+                height: 84px;
+                background-size: 50%;
+                opacity: 0.05;
+                right: -10px;
+                top: 10px;
+                transform: rotate(-3deg);
+            }
+
+            section:nth-of-type(even)::after {
+                left: -10px;
+                transform: rotate(3deg);
+            }
+
+            /* side columns narrow footprint */
+            .side-column {
+                left: 6px;
+                width: 56px;
+                background-size: 40px auto;
+                opacity: 0.08;
+            }
+
+            .side-column--2 {
+                left: 68px;
+                width: 56px;
+                background-size: 40px auto;
+                opacity: 0.07;
+                transform: scaleX(0.99) rotate(0.6deg);
+            }
+
+            /* reduce footer padding and font sizes */
+            footer {
+                padding: 28px 0;
+            }
+
+            .footer-grid {
+                gap: 10px;
+            }
+
+            .footer-grid p,
+            .footer-grid h4 {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Very small / landscape tiny devices */
+        @media (max-width: 360px) {
+            .container {
+                padding-left: calc(12px + 56px);
+                padding-right: 8px;
+            }
+
+            header .header-inner {
+                padding-left: calc(8px + 56px);
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .video-thumb {
+                height: 120px;
+            }
+
+            .gas-intro p.lead {
+                font-size: 1rem;
+            }
+        }
+
+        /* Accessibility: respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+
+            .hero::after,
+            .reveal,
+            .reveal.visible,
+            .side-column,
+            .side-column--2,
+            .video-play,
+            section::after {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Ensure grids collapse gracefully if container space is reduced */
+        .values-grid,
+        .team-grid {
+            grid-auto-rows: 1fr;
+        }
+
+        /* Final minor polish to avoid content underlap with side columns on all small screens */
+        @media (max-width: 900px) {
+
+            /* increase left padding slightly across smaller breakpoints to prevent overlap */
+            .container {
+                padding-left: calc(20px + min(96px, 12vw));
+            }
+
+            header .header-inner {
+                padding-left: calc(12px + min(96px, 12vw));
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="side-pattern" aria-hidden="true"></div>
+
+    <div class="side-column" aria-hidden="true"></div>
+    <div class="side-column--2" aria-hidden="true"></div>
+
+    <header id="site-header" role="banner" aria-label="Main header">
+        <div class="header-inner container">
+            <div class="logo">
+                <img src="img/logo-footer.png" alt="Ágil Energia logo" loading="lazy">
+            </div>
+
+            <nav class="nav" role="navigation" aria-label="Primary">
+                <a href="#home" class="nav-link" id="nav-home">Início</a>
+                <a href="#gas" class="nav-link" id="nav-gas">Gás Natural</a> 
+                <a href="#team" class="nav-link" id="nav-team">Nossa Equipe</a>
+                <a href="#future" class="nav-link" id="nav-future">Nosso Futuro</a>
+                <a href="#ethics" class="nav-link" id="nav-ethics">Ética</a>
+                <a href="#news" class="nav-link" id="nav-news">Notícias</a>
+            </nav>
+
+            <div class="header-controls">
+                <button class="btn-lang lang-toggle" id="lang-desktop" aria-pressed="false">EN</button>
+                <div style="display:flex;align-items:center;gap:8px">
+                    <button class="btn-lang mobile-lang" id="lang-mobile" aria-pressed="false" style="display:none">EN</button>
+                    <button class="menu-toggle" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
+                        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu-panel" id="mobilePanel" aria-hidden="true">
+        <a href="#home" class="mobile-link" id="mob-nav-home">Início</a>
+        <a href="#gas" class="mobile-link" id="mob-nav-gas">Gás Natural</a> <a href="#team" class="mobile-link" id="mob-nav-team">Nossa Equipe</a>
+        <a href="#future" class="mobile-link" id="mob-nav-future">Nosso Futuro</a>
+        <a href="#ethics" class="mobile-link" id="mob-nav-ethics">Ética</a>
+        <a href="#news" class="mobile-link" id="mob-nav-news">Notícias</a>
+        <div style="margin-top:auto">
+            <button class="mobile-lang" id="mobileLangBtn">EN</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero" role="region" aria-label="Hero">
+        <div class="hero-content container">
+            <h1 id="hero-title">Remodelando o futuro do gás natural no Brasil</h1>
+            <p id="hero-sub">Inovação tecnológica e excelência operacional no setor energético</p>
+        </div>
+    </section>
+
+
+
+    <main>
+        <section id="home" class="reveal">
+            <div class="container card">
+                <h2 class="section-title" id="title-whoweare">Quem Somos</h2>
+                <div id="home-content" class="content-text"></div>
+
+                <div class="values-grid" aria-hidden="false">
+                    <div class="value">
+                        <h3 id="val-title-tech">Excelência Técnica</h3>
+                        <p id="val-desc-tech" class="muted">Utilizamos as mais avançadas tecnologias de processamento sísmico e imageamento
+                            geofísico.</p>
+                    </div>
+                    <div class="value">
+                        <h3 id="val-title-sust">Sustentabilidade</h3>
+                        <p id="val-desc-sust" class="muted">Compromisso com práticas ambientalmente responsáveis e desenvolvimento
+                            sustentável.</p>
+                    </div>
+                    <div class="value">
+                        <h3 id="val-title-innv">Inovação</h3>
+                        <p id="val-desc-innv" class="muted">Investimento contínuo em tecnologias e metodologias de ponta.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="future-banner" role="region" aria-label="Futuro">
+            <div class="future-inner container">
+                <h2 id="future-title">A energia do futuro hoje</h2>
+                <p id="future-sub">Estamos por trás do gás que move a sua vida</p>
+            </div>
+        </section>
+
+        <section id="gas" class="gas-section reveal" aria-label="Gás Natural Onshore">
+            <div class="gas-inner">
+                <div class="gas-intro">
+                    <h2 id="gas-main-title">Gás Natural Onshore</h2>
+                    <p class="lead" id="gas-lead">Energia que move o futuro do Brasil</p>
+                    <p class="meta" id="gas-meta">O gás natural onshore é extraído de reservatórios localizados em terra firme — uma
+                        fonte limpa e eficiente que suporta logística otimizada, menores custos operacionais e impactos
+                        ambientais reduzidos.</p>
+
+                    <div class="gas-features" aria-hidden="false">
+                        <div class="gas-item">
+                            <div class="icon"><i class="fa-solid fa-industry"></i></div>
+                            <div>
+                                <h4 id="gas-feat-1-title">Exploração em terra</h4>
+                                <p id="gas-feat-1-desc">Atuação em bacias sedimentares brasileiras com presença estratégica onshore.</p>
+                            </div>
+                        </div>
+
+                        <div class="gas-item">
+                            <div class="icon"><i class="fa-solid fa-microscope"></i></div>
+                            <div>
+                                <h4 id="gas-feat-2-title">Tecnologia Avançada</h4>
+                                <p id="gas-feat-2-desc">Reprocessamento sísmico e imageamento geofísico de alta precisão.</p>
+                            </div>
+                        </div>
+
+                        <div class="gas-item">
+                            <div class="icon"><i class="fa-solid fa-leaf"></i></div>
+                            <div>
+                                <h4 id="gas-feat-3-title">Sustentabilidade</h4>
+                                <p id="gas-feat-3-desc">Menor intensidade de emissões e foco em práticas socioambientais responsáveis.</p>
+                            </div>
+                        </div>
+
+                        <div class="gas-item">
+                            <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+                            <div>
+                                <h4 id="gas-feat-4-title">Eficiência</h4>
+                                <p id="gas-feat-4-desc">Redução de riscos e otimização de processos logísticos e operacionais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="gas-video" aria-label="Vídeo explicativo">
+                    <div class="video-thumb" id="gas-thumb" style="background-image:url('img/hero-energia.jpg')"
+                        data-video="videos/agil-hamming-question.mp4">
+                        <button class="video-play" aria-label="Assistir vídeo" id="gas-play"><i
+                                class="fa-solid fa-play"></i></button>
+                    </div>
+                    <div class="video-caption" id="gas-video-caption">Assista: Gás Natural Onshore — visão geral e impacto para o Brasil</div>
+                </aside>
+            </div>
+        </section>
+        <section id="team" class="reveal">
+            <div class="container card">
+                <h2 class="section-title" id="title-team">Nossa Equipe</h2>
+                <div class="team-grid">
+                    <div class="member">
+                        <h3>Dr. João Silva</h3>
+                        <div id="team-1-role" class="muted">CEO e Fundador</div>
+                        <p id="team-1-desc" class="muted">Com mais de 25 anos de experiência no setor de óleo e gás, liderou projetos de
+                            exploração em diversas bacias sedimentares brasileiras.</p>
+                        <a id="team-1-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener"><i
+                                class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                    <div class="member">
+                        <h3>Eng. Maria Santos</h3>
+                        <div id="team-2-role" class="muted">Diretora de Operações</div>
+                        <p id="team-2-desc" class="muted">Engenheira de Petróleo com MBA em Gestão de Projetos, atuou em grandes
+                            operações nacionais e internacionais.</p>
+                        <a id="team-2-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener"><i
+                                class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                    <div class="member">
+                        <h3>Dr. Carlos Oliveira</h3>
+                        <div id="team-3-role" class="muted">Diretor Técnico</div>
+                        <p id="team-3-desc" class="muted">Geofísico com doutorado em Processamento Sísmico, referência em imageamento da
+                            subsuperfície.</p>
+                        <a id="team-3-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener"><i
+                                class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="reveal">
+            <div class="container card">
+                <h2 class="section-title" id="title-future">Remodelando o Futuro do Gás Natural</h2>
+                <div id="future-content" class="content-text"></div>
+            </div>
+        </section>
+
+
+        <section id="ethics" class="reveal">
+            <div class="container card">
+                <h2 class="section-title" id="title-ethics">Código de Ética e Conduta</h2>
+                <div id="ethics-content" class="content-text"></div>
+                <p style="margin-top:16px"><a id="ethics-download-link" href="pdfs/codigo-de-etica.pdf" class="link-ghost" download><i
+                            class="fa fa-download"></i> Baixar Código de Ética (PDF)</a></p>
+            </div>
+        </section>
+
+        <section id="news" class="reveal">
+            <div class="container card">
+                <h2 class="section-title" id="title-news">Notícias</h2>
+                <div class="news-list">
+                    <article class="news-item">
+                        <h4 id="news-1-title">Parceria que transforma dados em descobertas: Ágil Energia + CImaGeo</h4>
+                        <div id="news-1-date" class="muted">22 de outubro de 2025</div>
+                        <p id="news-1-summary" class="muted">Uma união técnica para extrair mais valor dos dados sísmicos legados.</p>
+                        <a id="news-1-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener">Leia mais
+                            •</a>
+                    </article>
+                    <article class="news-item">
+                        <h4 id="news-2-title">Exploração onshore mais precisa</h4>
+                        <div id="news-2-date" class="muted">15 de outubro de 2025</div>
+                        <p id="news-2-summary" class="muted">Inovações em aquisição e processamento redefinem oportunidades em terra.</p>
+                        <a id="news-2-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener">Leia mais
+                            •</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+        </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo">
+                        <img src="img/logo-footer.png" alt="Ágil Energia logo" loading="lazy">
+                        <span class="brand" id="brand-name-footer">ÁGIL ENERGIA</span>
+                    </div>
+                    <p id="footer-subtext" class="muted" style="color:rgba(255,255,255,0.9)">Remodelando o futuro do gás natural no Brasil
+                        através de inovação tecnológica e excelência operacional.</p>
+                </div>
+                <div>
+                    <h4 id="footer-title-links" style="color:#fff">Links</h4>
+                    <p><a href="#home" class="link-ghost" id="footer-link-quem">Quem Somos</a></p>
+                    <p><a href="#team" class="link-ghost" id="footer-link-equipe">Nossa Equipe</a></p>
+                </div>
+                <div>
+                    <h4 id="footer-title-contact" style="color:#fff">Contato</h4>
+                    <p class="muted" style="color:rgba(255,255,255,0.9)">contato@agilenergia.com.br</p>
+                    <p class="muted" style="color:rgba(255,255,255,0.9)">denunciaetica@agilenergia.com.br</p>
+                </div>
+            </div>
+
+            <div id="footer-copyright" style="margin-top:18px;text-align:center;color:rgba(255,255,255,0.8)">&copy; 2025 Ágil Energia. Todos
+                os direitos reservados.</div>
+        </div>
+    </footer>
+
+    <a class="whatsapp" href="https://wa.me/5584994096262?text=Olá%20Ágil%20Energia!" target="_blank"
+        aria-label="Abrir WhatsApp">
+        <span class="icon"><i class="fab fa-whatsapp"></i></span>
+        <span class="txt" id="whatsapp-btn-text">Fale conosco</span>
+    </a>
+
+    <template id="home-pt">
+        <p>A Ágil Energia é uma empresa brasileira pioneira em exploração de gás natural em terra, com atuação
+            estratégica nas principais bacias sedimentares do país. Fundada com o propósito de transformar o cenário
+            energético nacional, combinamos expertise técnica de classe mundial com profundo conhecimento do mercado
+            brasileiro.</p>
+        <p>Nossa estratégia está alinhada à exploração de gás natural em terra, focando no reprocessamento sísmico de
+            alta precisão e técnicas avançadas de imageamento geofísico. Com isso, buscamos identificar e desenvolver
+            novos potenciais exploratórios, contribuindo para a segurança energética e o desenvolvimento sustentável do
+            Brasil.</p>
+        <p>Operamos com rigor técnico, governança corporativa sólida e compromisso inabalável com a sustentabilidade,
+            segurança operacional e responsabilidade social.</p>
+    </template>
+
+    <template id="home-en">
+        <p>Ágil Energia is a pioneering Brazilian company in onshore natural gas exploration, with strategic operations
+            across the country's sedimentary basins. We combine world-class technical expertise with deep local market
+            knowledge.</p>
+        <p>Our strategy focuses on high-precision seismic reprocessing and advanced geophysical imaging to identify new
+            exploratory potential with greater accuracy and reduced risk.</p>
+        <p>We operate with technical rigor, strong corporate governance and an unwavering commitment to sustainability
+            and operational safety.</p>
+    </template>
+
+    <template id="gas-meta-pt">
+        O gás natural onshore é extraído de reservatórios localizados em terra firme — uma
+        fonte limpa e eficiente que suporta logística otimizada, menores custos operacionais e impactos
+        ambientais reduzidos.
+    </template>
+
+    <template id="gas-meta-en">
+        Onshore natural gas is extracted from reservoirs located on dry land — a clean and efficient source that supports optimized logistics, lower operational costs, and reduced environmental impact.
+    </template>
+
+    <template id="future-pt">
+        <p>O Brasil possui um imenso potencial inexplorado em suas bacias sedimentares terrestres. A Ágil Energia aplica
+            tecnologias de ponta em reprocessamento de dados sísmicos legados para revelar potenciais antes ocultos.</p>
+        <p>Trabalhamos com milhares de km de dados 2D e 3D, usando CRS e migrações avançadas para melhorar resolução e
+            reduzir risco exploratório.</p>
+    </template>
+
+    <template id="future-en">
+        <p>Brazil has immense untapped potential in its onshore sedimentary basins. Ágil Energia applies cutting-edge
+            seismic reprocessing techniques to reveal previously hidden potential.</p>
+        <p>We process extensive 2D and 3D datasets using CRS and advanced migrations to enhance resolution and reduce
+            exploration risk.</p>
+    </template>
+
+    <template id="ethics-pt">
+        <p>A Ágil Energia pauta sua atuação nos mais elevados padrões éticos e de conduta empresarial. Nosso Código de
+            Ética estabelece princípios que orientam nossas relações com colaboradores, parceiros e comunidades.</p>
+        <p>• Integridade e transparência • Respeito às leis • Compromisso com práticas anticorrupção • Responsabilidade
+            ambiental</p>
+    </template>
+
+    <template id="ethics-en">
+        <p>Ágil Energia operates according to the highest ethical and business conduct standards. Our Code of Ethics
+            sets principles that guide relationships with employees, partners and communities.</p>
+        <p>• Integrity and transparency • Legal compliance • Anti-corruption commitment • Environmental responsibility
+        </p>
+    </template>
+
+    <script>
+        (function () {
+            'use strict';
+
+            /* ---------- Helpers ---------- */
+            const safe = (fn) => { try { fn(); } catch (e) { console.error(e); } };
+
+            /* ---------- i18n (templates & map) ---------- */
+            safe(() => {
+                const langs = { current: localStorage.getItem('agil_lang') || 'pt' };
+
+                // Mapeamento de todas as strings estáticas na página
+                const i18n_map = {
+                    'pt': {
+                        'page-title': 'Ágil Energia — Gás do Futuro',
+                        'brand-name': 'ÁGIL ENERGIA',
+                        'brand-name-footer': 'ÁGIL ENERGIA',
+                        'nav-home': 'Início', 'mob-nav-home': 'Início',
+                        'nav-gas': 'Gás Natural', 'mob-nav-gas': 'Gás Natural',
+                        'nav-team': 'Nossa Equipe', 'mob-nav-team': 'Nossa Equipe',
+                        'nav-future': 'Nosso Futuro', 'mob-nav-future': 'Nosso Futuro',
+                        'nav-ethics': 'Ética', 'mob-nav-ethics': 'Ética',
+                        'nav-news': 'Notícias', 'mob-nav-news': 'Notícias',
+                        'hero-title': 'Remodelando o futuro do gás natural no Brasil',
+                        'hero-sub': 'Inovação tecnológica e excelência operacional no setor energético',
+                        'future-title': 'A energia do futuro hoje',
+                        'future-sub': 'Estamos por trás do gás que move a sua vida',
+                        'title-whoweare': 'Quem Somos',
+                        'title-team': 'Nossa Equipe',
+                        'title-future': 'Remodelando o Futuro do Gás Natural',
+                        'title-ethics': 'Código de Ética e Conduta',
+                        'title-news': 'Notícias',
+                        'val-title-tech': 'Excelência Técnica',
+                        'val-desc-tech': 'Utilizamos as mais avançadas tecnologias de processamento sísmico e imageamento geofísico.',
+                        'val-title-sust': 'Sustentabilidade',
+                        'val-desc-sust': 'Compromisso com práticas ambientalmente responsáveis e desenvolvimento sustentável.',
+                        'val-title-innv': 'Inovação',
+                        'val-desc-innv': 'Investimento contínuo em tecnologias e metodologias de ponta.',
+                        'gas-main-title': 'Gás Natural Onshore',
+                        'gas-lead': 'Energia que move o futuro do Brasil',
+                        'gas-feat-1-title': 'Exploração em terra',
+                        'gas-feat-1-desc': 'Atuação em bacias sedimentares brasileiras com presença estratégica onshore.'
+                        ,
+                        'gas-feat-2-title': 'Tecnologia Avançada',
+                        'gas-feat-2-desc': 'Reprocessamento sísmico e imageamento geofísico de alta precisão.'
+                        ,
+                        'gas-feat-3-title': 'Sustentabilidade',
+                        'gas-feat-3-desc': 'Menor intensidade de emissões e foco em práticas socioambientais responsáveis.',
+                        'gas-feat-4-title': 'Eficiência',
+                        'gas-feat-4-desc': 'Redução de riscos e otimização de processos logísticos e operacionais.',
+                        'gas-video-caption': 'Assista: Gás Natural Onshore — visão geral e impacto para o Brasil',
+                        'team-1-role': 'CEO e Fundador',
+                        'team-1-desc': 'Com mais de 25 anos de experiência no setor de óleo e gás, liderou projetos de exploração em diversas bacias sedimentares brasileiras.',
+                        'team-2-role': 'Diretora de Operações',
+                        'team-2-desc': 'Engenheira de Petróleo com MBA em Gestão de Projetos, atuou em grandes operações nacionais e internacionais.',
+                        'team-3-role': 'Diretor Técnico',
+                        'team-3-desc': 'Geofísico com doutorado em Processamento Sísmico, referência em imageamento da subsuperfície.',
+                        'ethics-download-link': 'Baixar Código de Ética (PDF)',
+                        'news-1-title': 'Parceria que transforma dados em descobertas: Ágil Energia + CImaGeo',
+                        'news-1-date': '22 de outubro de 2025',
+                        'news-1-summary': 'Uma união técnica para extrair mais valor dos dados sísmicos legados.',
+                        'news-1-link': 'Leia mais •',
+                        'news-2-title': 'Exploração onshore mais precisa',
+                        'news-2-date': '15 de outubro de 2025',
+                        'news-2-summary': 'Inovações em aquisição e processamento redefinem oportunidades em terra.',
+                        'news-2-link': 'Leia mais •',
+                        'footer-subtext': 'Remodelando o futuro do gás natural no Brasil através de inovação tecnológica e excelência operacional.',
+                        'footer-title-links': 'Links',
+                        'footer-link-quem': 'Quem Somos',
+                        'footer-link-equipe': 'Nossa Equipe',
+                        'footer-title-contact': 'Contato',
+                        'footer-copyright': '© 2025 Ágil Energia. Todos os direitos reservados.',
+                        'whatsapp-btn-text': 'Fale conosco',
+                    },
+                    'en': {
+                        'page-title': 'Ágil Energia — Gas of the Future',
+                        'brand-name': 'ÁGIL ENERGIA',
+                        'brand-name-footer': 'ÁGIL ENERGIA',
+                        'nav-home': 'Home', 'mob-nav-home': 'Home',
+                        'nav-gas': 'Natural Gas', 'mob-nav-gas': 'Natural Gas',
+                        'nav-team': 'Our Team', 'mob-nav-team': 'Our Team',
+                        'nav-future': 'Our Future', 'mob-nav-future': 'Our Future',
+                        'nav-ethics': 'Ethics', 'mob-nav-ethics': 'Ethics',
+                        'nav-news': 'News', 'mob-nav-news': 'News',
+                        'hero-title': 'Reshaping the future of natural gas in Brazil',
+                        'hero-sub': 'Technological innovation and operational excellence in the energy sector',
+                        'future-title': 'The energy of the future today',
+                        'future-sub': 'We are behind the gas that powers your life',
+                        'title-whoweare': 'Who We Are',
+                        'title-team': 'Our Team',
+                        'title-future': 'Reshaping the Future of Natural Gas',
+                        'title-ethics': 'Code of Ethics and Conduct',
+                        'title-news': 'News',
+                        'val-title-tech': 'Technical Excellence',
+                        'val-desc-tech': 'We use the most advanced seismic processing and geophysical imaging technologies.',
+                        'val-title-sust': 'Sustainability',
+                        'val-desc-sust': 'Commitment to environmentally responsible practices and sustainable development.',
+                        'val-title-innv': 'Innovation',
+                        'val-desc-innv': 'Continuous investment in cutting-edge technologies and methodologies.',
+                        'gas-main-title': 'Onshore Natural Gas',
+                        'gas-lead': 'Energy that powers Brazil\'s future',
+                        'gas-feat-1-title': 'Onshore Exploration',
+                        'gas-feat-1-desc': 'Operating in Brazilian sedimentary basins with strategic onshore presence.',
+                        'gas-feat-2-title': 'Advanced Technology',
+                        'gas-feat-2-desc': 'Seismic reprocessing and high-precision geophysical imaging.',
+                        'gas-feat-3-title': 'Sustentabilidade',
+                        'gas-feat-3-desc': 'Lower emissions intensity and focus on responsible socio-environmental practices.',
+                        'gas-feat-4-title': 'Efficiency',
+                        'gas-feat-4-desc': 'Risk reduction and optimization of logistics and operational processes.',
+                        'gas-video-caption': 'Watch: Onshore Natural Gas — overview and impact for Brazil',
+                        'team-1-role': 'CEO and Founder',
+                        'team-1-desc': 'With over 25 years of experience in the oil and gas sector, he has led exploration projects in various Brazilian sedimentary basins.',
+                        'team-2-role': 'Operations Director',
+                        'team-2-desc': 'Petroleum Engineer with an MBA in Project Management, she has worked in major national and international operations.',
+                        'team-3-role': 'Technical Director',
+                        'team-3-desc': 'Geophysicist with a doctorate in Seismic Processing, a reference in subsurface imaging.',
+                        'ethics-download-link': 'Download Code of Ethics (PDF)',
+                        'news-1-title': 'Partnership that turns data into discoveries: Ágil Energia + CImaGeo',
+                        'news-1-date': 'October 22, 2025',
+                        'news-1-summary': 'A technical union to extract more value from legacy seismic data.',
+                        'news-1-link': 'Read more •',
+                        'news-2-title': 'More accurate onshore exploration',
+                        'news-2-date': 'October 15, 2025',
+                        'news-2-summary': 'Innovations in acquisition and processing redefine onshore opportunities.',
+                        'news-2-link': 'Read more •',
+                        'footer-subtext': 'Reshaping the future of natural gas in Brazil through technological innovation and operational excellence.',
+                        'footer-title-links': 'Links',
+                        'footer-link-quem': 'Who We Are',
+                        'footer-link-equipe': 'Our Team',
+                        'footer-title-contact': 'Contact',
+                        'footer-copyright': '© 2025 Ágil Energia. All rights reserved.',
+                        'whatsapp-btn-text': 'Talk to us',
+                    }
+                };
+
+                const textMap = [
+                    { sel: '#home-content', tpl: 'home' },
+                    { sel: '#future-content', tpl: 'future' },
+                    { sel: '#ethics-content', tpl: 'ethics' },
+                ];
+
+                // Nova função que aplica todas as traduções
+                function applyTranslations(lang) {
+                    // 1. Aplica strings curtas via i18n_map
+                    const translations = i18n_map[lang] || i18n_map['pt'];
+                    for (const id in translations) {
+                        const el = document.getElementById(id);
+                        if (el) {
+                            // Título da página precisa de tratamento especial
+                            if (id === 'page-title') {
+                                document.title = translations[id];
+                            } else if (id === 'ethics-download-link') {
+                                // O link de download tem um ícone, precisamos manter a estrutura HTML
+                                const icon = el.querySelector('.fa-download') ? el.innerHTML.match(/<i[^>]*><\/i>/i)[0] : '';
+                                el.innerHTML = `${icon} ${translations[id]}`;
+                            } else {
+                                el.textContent = translations[id];
+                            }
+                        }
+                    }
+
+                    // 2. Aplica strings longas via templates
+                    textMap.forEach(m => {
+                        const container = document.querySelector(m.sel);
+                        const tpl = document.getElementById(`${m.tpl}-${lang}`);
+                        if (container && tpl) container.innerHTML = tpl.innerHTML;
+                    });
+                    
+                    // 3. Aplica template para a seção Gás (novo)
+                    const elGasMeta = document.getElementById('gas-meta');
+                    if (elGasMeta) {
+                        const tplGas = document.getElementById(`gas-meta-${lang}`);
+                        if (tplGas) elGasMeta.innerHTML = tplGas.innerHTML;
+                    }
+                } // end applyTranslations
+
+                function toggleLanguage() {
+                    langs.current = (langs.current === 'pt') ? 'en' : 'pt';
+                    localStorage.setItem('agil_lang', langs.current);
+                    applyTranslations(langs.current);
+                }
+
+                // vincula ambos botões de idioma (desktop + mobile)
+                document.querySelectorAll('.btn-lang, .mobile-lang').forEach(btn => btn.addEventListener('click', toggleLanguage));
+
+                // inicializa textos
+                applyTranslations(langs.current);
+
+            }); // end safe
+
+            /* ---------- Mobile menu ---------- */
+            safe(() => {
+                const menuBtn = document.getElementById('menuBtn');
+                const panel = document.getElementById('mobilePanel');
+                if (!menuBtn || !panel) return;
+
+                function setOpenState(open) {
+                    panel.classList.toggle('show', open);
+                    menuBtn.classList.toggle('open', open);
+                    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+                    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+                }
+
+                // Toggle via botão hamburger
+                menuBtn.addEventListener('click', (ev) => {
+                    ev.stopPropagation();
+                    const isOpen = panel.classList.contains('show');
+                    setOpenState(!isOpen);
+                });
+
+                // Fecha ao clicar em um link do menu mobile
+                document.querySelectorAll('.mobile-link').forEach(a => a.addEventListener('click', () => {
+                    setOpenState(false);
+                }));
+
+                // Fecha com Escape
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') setOpenState(false);
+                });
+
+                // Fecha ao clicar fora do painel (quando aberto)
+                document.addEventListener('click', (e) => {
+                    const target = e.target;
+                    const open = panel.classList.contains('show');
+                    if (!open) return;
+                    if (target === panel || panel.contains(target) || target === menuBtn || menuBtn.contains(target)) return;
+                    setOpenState(false);
+                });
+
+                // garante estado consistente no load (acessibilidade)
+                setOpenState(false);
+            });
+
+            /* ---------- Reveal on scroll ---------- */
+            safe(() => {
+                const revealEls = Array.from(document.querySelectorAll('.reveal'));
+                if (revealEls.length) {
+                    const io = new IntersectionObserver((entries) => {
+                        entries.forEach(e => {
+                            if (e.isIntersecting) e.target.classList.add('visible');
+                        });
+                    }, { threshold: 0.14 });
+                    revealEls.forEach(s => io.observe(s));
+                }
+            });
+
+            /* ---------- Header shrink ---------- */
+            safe(() => {
+                const header = document.getElementById('site-header');
+                if (!header) return;
+                let ticking = false;
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            header.classList.toggle('shrink', window.scrollY > 50);
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }, { passive: true });
+            });
+
+            /* ---------- Hero parallax ---------- */
+            safe(() => {
+               
+                const hero = document.querySelector('.hero');
+                if (!hero) return;
+                window.addEventListener('scroll', () => {
+                    const y = window.scrollY || 0;
+                    hero.style.backgroundPosition = `center ${Math.max(-40, y * 0.12)}px`;
+                }, { passive: true });
+            });
+
+            /* ---------- Side columns (primary + secondary) ---------- */
+            safe(() => {
+                const colSel = ['.side-column', '.side-column--2'];
+                const cols = colSel.map(s => document.querySelector(s)).filter(Boolean);
+                if (!cols.length) return;
+
+                const startEl = () => document.getElementById('home');
+                const endEl = () => document.getElementById('news');
+
+                function updateSideColumns() {
+                    const start = startEl();
+                    const end = endEl();
+                    if (!start || !end) {
+                        cols.forEach(c => c.style.display = 'none');
+                        return;
+                    }
+
+                    const scrollY = window.scrollY || window.pageYOffset || 0;
+                    const startRect = start.getBoundingClientRect();
+                    const endRect = end.getBoundingClientRect();
+
+                    const top = Math.min(startRect.top + scrollY, endRect.top + scrollY);
+                    const bottom = Math.max(startRect.bottom + scrollY, endRect.bottom + scrollY);
+
+                    const padTop = 12;
+                    const padBottom = 24;
+                    const newTop = Math.max(0, top - padTop);
+                    const newHeight = Math.max(120, (bottom - top) + padTop + padBottom);
+
+                    cols.forEach((col, idx) => {
+                        col.style.top = newTop + 'px';
+                        col.style.height = newHeight + 'px';
+                        // Always show columns — visibility / size should be handled in CSS (no JS hide)
+                        col.style.display = 'block';
+                        col.style.willChange = 'transform, top, height';
+                    });
+                }
+
+                function sideOnScroll() {
+                    const y = window.scrollY || 0;
+                    cols.forEach((col, idx) => {
+                        const factor = idx === 0 ? 0.02 : 0.035;
+                        const rotate = (idx === 1) ? ' rotate(2deg)' : '';
+                        col.style.transform = `translateY(${Math.round(y * factor)}px)${rotate}`;
+                    });
+                }
+
+                window.addEventListener('load', updateSideColumns, { passive: true });
+                window.addEventListener('resize', updateSideColumns, { passive: true });
+                window.addEventListener('scroll', sideOnScroll, { passive: true });
+
+                const mo = new MutationObserver(() => updateSideColumns());
+                mo.observe(document.body, { childList: true, subtree: true, attributes: false });
+
+                // initial call after layout settles
+                setTimeout(updateSideColumns, 150);
+            });
+
+            /* ---------- Smooth anchor behavior & accessible focus helpers ---------- */
+            safe(() => {
+                document.querySelectorAll('a[href^="#"]').forEach(a => {
+                    a.addEventListener('click', function (evt) {
+                        const tgt = document.querySelector(this.getAttribute('href'));
+                        if (tgt) {
+                            evt.preventDefault();
+                            tgt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            const panel = document.getElementById('mobilePanel');
+                            if (panel) panel.classList.remove('show');
+                        }
+                    });
+                });
+
+               
+
+                // focus visible polish
+                document.addEventListener('focusin', (e) => {
+                    if (e.target.closest('.menu-toggle') || e.target.closest('.mobile-link')) {
+                        e.target.classList.add('focus-visible');
+                    } else {
+                        document.querySelectorAll('.menu-toggle, .mobile-link').forEach(btn => btn.classList.remove('focus-visible'));
+                    }
+                });
+            });
+
+            /* ---------- Parallax sections ---------- */
+            safe(() => {
+                // Seleciona seções que possuem background-image (não precisa marcar manualmente).
+                const sections = Array.from(document.querySelectorAll('section')).filter(el => {
+                    const bg = getComputedStyle(el).backgroundImage || '';
+                    return bg !== 'none' && bg.trim() !== '' && /url\(/i.test(bg);
+                });
+
+                if (!sections.length) return;
+
+                // configura velocidade padrão por seção (pode ser sobrescrito com data-parallax-speed)
+                const defaultSpeed = el => {
+                    // hero mais pronunciado, banners menores
+                    if (el.classList.contains('hero')) return 0.22;
+                    if (el.classList.contains('future-banner')) return 0.12;
+                    return 0.10;
+                };
+
+                // função que atualiza posição do background para dar efeito parallax
+                function updateParallax() {
+                    const vh = window.innerHeight;
+                    const width = window.innerWidth;
+
+                    // reduzir intensidade em telas pequenas para evitar sobreposição forte
+                    const deviceScale = width <= 420 ? 0.45 : (width <= 900 ? 0.7 : 1);
+
+                    sections.forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        // se estiver fora do viewport, podemos ainda dar um pequeno ajuste para continuidade
+                        if (rect.height <= 0) return;
+
+                        // velocidade customizável via atributo data-parallax-speed
+                        const attr = parseFloat(el.getAttribute('data-parallax-speed'));
+                        const speed = (!isNaN(attr) ? attr : defaultSpeed(el)) * deviceScale;
+
+                        // centro do elemento relativamente ao centro da viewport -> gera offset suave
+                        // percent varia aproximadamente -1 (muito acima) .. +1 (muito abaixo)
+                        const centerDistance = (rect.top + rect.height / 2) - (vh / 2);
+                        const percent = (centerDistance) / (vh / 2); // valor -inf..inf, normalmente -2..2
+                        // use o percent e a altura do elemento para calcular offset em px
+                        const maxOffset = Math.min(rect.height * 0.5, 300); // limite prático
+                        const offset = Math.round(- percent * maxOffset * speed);
+
+                        // atualiza background-position de forma performática
+                        el.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+                        // garantir classe parallax para aplicar will-change
+                        el.classList.add('parallax');
+                    });
+                }
+
+                // throttle via requestAnimationFrame
+                let ticking = false;
+                function onScrollOrResize() {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            updateParallax();
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }
+
+                window.addEventListener('scroll', onScrollOrResize, { passive: true });
+                window.addEventListener('resize', onScrollOrResize, { passive: true });
+                // inicializa após small delay para garantir imagens/fonts carregadas
+                window.addEventListener('load', () => {
+                    setTimeout(updateParallax, 80);
+                });
+
+                // também observe mudanças de layout significativas
+                const mo = new MutationObserver(() => {
+                    setTimeout(updateParallax, 60);
+                });
+                mo.observe(document.body, { childList: true, subtree: true });
+
+            });
+
+        })(); 
+    </script>
+    <script>
+        (function () {
+            'use strict';
+
+            /* ===== Video modal logic for gas section ===== */
+            function openVideoModal(src) {
+                if (!src) return;
+                // create modal
+                const modal = document.createElement('div');
+                modal.className = 'video-modal';
+                modal.innerHTML = `
+                <div class="frame" role="dialog" aria-modal="true">
+                    <button class="close" aria-label="Fechar">✕</button>
+                    <iframe src="${src}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;"></iframe>
+                </div>
+            `;
+                document.body.appendChild(modal);
+                // focus / close handlers
+                const closeBtn = modal.querySelector('.close');
+                function close() { modal.remove(); window.removeEventListener('keydown', onKey); }
+                closeBtn.addEventListener('click', close);
+                modal.addEventListener('click', (ev) => { if (ev.target === modal) close(); });
+                function onKey(e) { if (e.key === 'Escape') close(); }
+                window.addEventListener('keydown', onKey);
+            }
+
+            // attach to gas play button
+            const playBtn = document.getElementById('gas-play');
+            if (playBtn) {
+                playBtn.addEventListener('click', function () {
+                    const thumb = document.getElementById('gas-thumb');
+                    const src = thumb && thumb.getAttribute('data-video');
+                    // if user left placeholder VIDEO_ID, do nothing and log
+                    if (src && src.indexOf('VIDEO_ID') !== -1) {
+                        // replace placeholder with a real id or inform user
+                        console.warn('Gas video: replace VIDEO_ID in data-video attribute with a valid YouTube id.');
+                    }
+                    openVideoModal(src);
+                });
+            }
+
+            /* ===== sprinkle subtle gas lines in other sections (dynamic enhancement) ===== */
+            // add short callout under titles for visual emphasis (non intrusive)
+            const sectionsToEnhance = ['#home', '#team', '#future', '#ethics', '#news'];
+            sectionsToEnhance.forEach(sel => {
+                const el = document.querySelector(sel);
+                if (!el) return;
+                const hint = document.createElement('div');
+                hint.className = 'gas-hint';
+                hint.style.cssText = 'position:relative;z-index:2;margin-top:12px;color:rgba(74,14,115,0.08);font-weight:700;font-size:0.95rem;';
+                // insert as first child of container/card if exists, otherwise at top
+                const card = el.querySelector('.card') || el.querySelector('.container') || el;
+                card.insertBefore(hint, card.firstChild);
+            });
+
+        })();
+    </script>
+</body>
+
+</html>
