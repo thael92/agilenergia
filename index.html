@@ -228,15 +228,29 @@
             position: absolute;
             top: 12px;
             right: 12px;
-            background: transparent;
-            border: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+            border: 1px solid rgba(255,255,255,0.10);
             color: #fff;
             font-size: 20px;
-            padding: 8px;
-            border-radius: 8px;
+            padding: 8px 10px;
+            border-radius: 10px;
             cursor: pointer;
             z-index: 1460;
             display: none;
+            transition: transform .18s var(--ease), background .18s, box-shadow .18s;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            line-height: 1;
+        }
+
+        .menu-panel .panel-close:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+        }
+
+        .menu-panel .panel-close:focus {
+            outline: 3px solid rgba(242,163,65,0.18);
+            outline-offset: 2px;
         }
 
         .menu-panel.show .panel-close {
@@ -1467,6 +1481,9 @@
     </header>
 
     <nav class="menu-panel" id="mobilePanel" aria-hidden="true">
+        <!-- Botão fechar no canto superior direito do painel mobile -->
+        <button class="panel-close" id="panelCloseBtn" aria-label="Fechar menu">✕</button>
+
         <a href="#home" class="mobile-link" id="mob-nav-home">Início</a>
         <a href="#gas" class="mobile-link" id="mob-nav-gas">Gás Natural</a> <a href="#team" class="mobile-link" id="mob-nav-team">Nossa Equipe</a>
         <a href="#future" class="mobile-link" id="mob-nav-future">Nosso Futuro</a>
@@ -1629,14 +1646,14 @@
                         <h4 id="news-1-title">Parceria que transforma dados em descobertas: Ágil Energia + CImaGeo</h4>
                         <div id="news-1-date" class="muted">22 de outubro de 2025</div>
                         <p id="news-1-summary" class="muted">Uma união técnica para extrair mais valor dos dados sísmicos legados.</p>
-                        <a id="news-1-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener">Leia mais
+                        <a id="news-1-link" class="link-ghost" href="https://www.linkedin.com/feed/update/urn:li:activity:7349040706763505665/" target="_blank" rel="noopener">Leia mais
                             •</a>
                     </article>
                     <article class="news-item">
                         <h4 id="news-2-title">Exploração onshore mais precisa</h4>
                         <div id="news-2-date" class="muted">15 de outubro de 2025</div>
                         <p id="news-2-summary" class="muted">Inovações em aquisição e processamento redefinem oportunidades em terra.</p>
-                        <a id="news-2-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener">Leia mais
+                        <a id="news-2-link" class="link-ghost" href="https://www.linkedin.com/pulse/explora%C3%A7%C3%A3o-onshore-mais-precisa-como-inova%C3%A7%C3%A3o-na-aquisi%C3%A7%C3%A3o-0ksmf/?trackingId=WAA%2FQYLMRZejtSMsu9R%2BpQ%3D%3D" target="_blank" rel="noopener">Leia mais
                             •</a>
                     </article>
                 </div>
@@ -1652,7 +1669,6 @@
                 <div>
                     <div class="logo">
                         <img src="img/logo-footer.png" alt="Ágil Energia logo" loading="lazy">
-                        <span class="brand" id="brand-name-footer">ÁGIL ENERGIA</span>
                     </div>
                     <p id="footer-subtext" class="muted" style="color:rgba(255,255,255,0.9)">Remodelando o futuro do gás natural no Brasil
                         através de inovação tecnológica e excelência operacional.</p>
@@ -1935,6 +1951,7 @@
             safe(() => {
                 const menuBtn = document.getElementById('menuBtn');
                 const panel = document.getElementById('mobilePanel');
+                const panelCloseBtn = document.getElementById('panelCloseBtn');
                 if (!menuBtn || !panel) return;
 
                 function setOpenState(open) {
@@ -1943,6 +1960,20 @@
                     menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
                     menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
                     panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+
+                    // when opening, move keyboard focus into panel (close button)
+                    if (open) {
+                        // small timeout to ensure element is visible for screen readers
+                        setTimeout(() => {
+                            if (panelCloseBtn) panelCloseBtn.focus();
+                        }, 50);
+                        // prevent body scroll while menu open
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        // restore focus to hamburger and body scroll
+                        menuBtn.focus();
+                        document.body.style.overflow = '';
+                    }
                 }
 
                 // Toggle via botão hamburger
@@ -1951,6 +1982,9 @@
                     const isOpen = panel.classList.contains('show');
                     setOpenState(!isOpen);
                 });
+
+                // Close button inside mobile panel (top-right)
+                if (panelCloseBtn) panelCloseBtn.addEventListener('click', () => setOpenState(false));
 
                 // Fecha ao clicar em um link do menu mobile
                 document.querySelectorAll('.mobile-link').forEach(a => a.addEventListener('click', () => {
