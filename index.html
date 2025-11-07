@@ -94,7 +94,7 @@
             height: 74px;
             display: flex;
             align-items: center;
-            background: linear-gradient(90deg, var(--p3), var(--p1));
+            background: linear-gradient(90deg, var(--p3) 0%, var(--p1) 85%, var(--accent) 120%);
             color: white;
             padding: 0 0.75rem;
             z-index: 1400;
@@ -127,7 +127,7 @@
         }
 
         .logo img {
-            height: 42px
+            height: 48px
         }
 
         .brand {
@@ -260,15 +260,13 @@
         /* hero */
         .hero {
             min-height: 84vh;
-            background-image: url('img/hero-energia.jpg');
-            background-size: cover;
-            background-position: center;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             padding-top: 74px;
             overflow: hidden;
+            background-color: var(--p4); /* Cor de fundo enquanto as imagens carregam */
         }
 
         /* PELÍCULA SUTIL para melhorar leitura do texto sobre a imagem */
@@ -293,9 +291,65 @@
             animation: gradMove 14s linear infinite;
         }
 
+        /* NOVO: Estilos para o Carrossel Hero */
+        .hero-slider {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* NOVO: Sobreposição escura para cada slide para garantir a legibilidade do texto */
+        .hero-slide::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10, 2, 20, 0.55) 0%, rgba(10, 2, 20, 0.25) 100%);
+            z-index: 2; /* Fica entre a imagem de fundo e o conteúdo de texto */
+            pointer-events: none;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .hero-pagination {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 4; /* Acima dos slides e overlays */
+        }
+
+        .hero-pagination .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            border: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer; transition: all .3s;
+        }
+        .hero-pagination .dot.active { background: var(--accent); transform: scale(1.2); }
+
         .hero-content {
             position: relative;
-            z-index: 3;
+            z-index: 3; /* Garante que o texto fique acima da sobreposição escura */
             text-align: center;
             color: #fff;
             max-width: 980px;
@@ -314,7 +368,7 @@
         }
 
         .hero p {
-            color: rgba(255, 255, 255, 0.92);
+            color: rgba(255, 255, 255, 0.95);
             font-size: 1.125rem;
             margin-top: 14px;
             max-width: 820px;
@@ -326,30 +380,23 @@
         .future-banner {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: center; /* Centralizado para o novo layout */
             padding: 42px 0;
-            background-image: url('img/future-energia.jpg');
-            background-size: cover;
-            background-position: center;
+            background: #fff; /* Fundo branco para legibilidade */
             position: relative
         }
 
         .future-banner::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, rgba(62, 21, 89, 0.72), rgba(116, 4, 191, 0.4));
-            mix-blend-mode: multiply;
-            z-index: 1
+            display: none; /* Remove o overlay escuro */
         }
 
         .future-inner {
             position: relative;
-            z-index: 2;
-            color: #fff;
+            z-index: 1;
+            color: var(--muted); /* Cor de texto padrão escura */
             padding: 60px;
-            max-width: 560px;
-            text-align: right
+            max-width: 980px; /* Aumentado para o layout centralizado */
+            text-align: center; /* Centraliza o conteúdo */
         }
 
         .future-inner h2 {
@@ -360,8 +407,40 @@
         }
 
         .future-inner p {
-            color: rgba(255, 255, 255, 0.95);
-            margin-top: 10px
+            color: var(--muted); /* Cor de texto escura */
+            margin-top: 10px;
+        }
+
+        /* NOVO: Grid de features na seção Future */
+        .future-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 32px; /* Aumenta o espaçamento */
+            text-align: center; /* Centraliza o texto dos itens */
+        }
+
+        .future-item {
+            background: #f7f6fb; /* Fundo de card sutil */
+            border: 1px solid rgba(116, 4, 191, 0.08); /* Borda sutil com cor primária */
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .future-item .icon {
+            font-size: 20px;
+            color: var(--accent);
+        }
+
+        .future-item h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--p3); /* Cor do título do card */
+            margin-top: 8px;
+        }
+
+        .future-item p {
+            font-size: 0.9rem; color: var(--muted); margin: 8px 0 0; line-height: 1.5;
         }
 
         /* sections (glass cards) */
@@ -382,7 +461,24 @@
             border-radius: 12px;
             padding: 22px;
             box-shadow: 0 18px 40px rgba(74, 14, 115, 0.06);
-            border: 1px solid rgba(116, 4, 191, 0.06)
+            border: 1px solid rgba(116, 4, 191, 0.06);
+            position: relative; /* Necessário para a logo flutuante */
+        }
+
+        /* NOVO: Estilo para a logo flutuante na seção "Quem Somos" */
+        .floating-logo {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            width: 120px;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        h2.section-title {
+            position: relative; /* Garante que o título fique acima da logo */
+            z-index: 1;
         }
 
         h2.section-title {
@@ -407,19 +503,37 @@
 
         /* values & team grids */
         .values-grid {
-            display: grid;
-            gap: 16px;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            margin-top: 20px
+            display: grid; 
+            gap: 18px; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            margin-top: 28px;
+            position: relative; /* Garante que os valores fiquem acima da logo */
+            z-index: 1;
         }
 
         .value {
             position: relative;
-            padding: 18px;
+            padding: 20px;
             border-radius: 12px;
             background: linear-gradient(145deg, #fff, #f7f6fb);
             box-shadow: 0 10px 30px rgba(74, 14, 115, 0.04);
-            border-left: 4px solid var(--p1)
+            border: 1px solid rgba(116, 4, 191, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* NOVO: Estilo para os ícones dos valores */
+        .value .icon {
+            font-size: 24px;
+            color: #fff;
+            background: linear-gradient(145deg, var(--p1), var(--p2));
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 20px rgba(74, 14, 115, 0.15);
         }
 
         .value h3 {
@@ -457,6 +571,67 @@
             border-left: 4px solid var(--p1)
         }
 
+        /* NOVO: Estilos para ícones sociais no footer */
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .social-links a {
+            color: rgba(255,255,255,0.8);
+            font-size: 22px;
+            transition: color .2s, transform .2s;
+        }
+        .social-links a:hover { color: #fff; transform: translateY(-2px); }
+
+        /* NOVO: Estilos para a seção 'future' aprimorada */
+        .future-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: center;
+            margin-top: 24px;
+        }
+
+        .future-tech-list {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .future-tech-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .future-tech-item .icon {
+            font-size: 18px;
+            color: var(--p1);
+            margin-top: 4px;
+        }
+
+        .future-tech-item h4 { margin: 0 0 4px; color: var(--p3); }
+        .future-tech-item p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+
+        .future-3d-viewers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            perspective: 1000px; /* Habilita a perspectiva 3D */
+        }
+
+        .viewer-3d {
+            height: 280px;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(116, 4, 191, 0.1);
+            box-shadow: 0 10px 30px rgba(74, 14, 115, 0.08);
+            transition: transform 0.1s linear; /* Transição suave para o efeito */
+        }
+
         /* footer */
         footer {
             background: linear-gradient(135deg, var(--p4), var(--p3));
@@ -470,19 +645,105 @@
         .footer-grid {
             display: grid;
             gap: 14px;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+            grid-template-columns: 2fr repeat(3, 1fr); /* Coluna do logo maior */
         }
 
         /* reveal animations */
         .reveal {
             opacity: 0;
-            transform: translateY(24px) scale(.995);
-            transition: opacity .7s var(--ease), transform .7s var(--ease)
+            transform: translateY(18px) scale(.995);
+            transition: opacity .7s var(--ease), transform .7s var(--ease);
+            will-change: opacity, transform;
         }
 
-        .reveal.visible {
+        /* slide-in from sides (alternating) */
+        .slide-from-left {
+            transform: translateX(-28px);
+            opacity: 0;
+        }
+        .slide-from-right {
+            transform: translateX(28px);
+            opacity: 0;
+        }
+
+        .reveal.visible,
+        .reveal.visible.slide-from-left,
+        .reveal.visible.slide-from-right {
             opacity: 1;
-            transform: none
+            transform: none;
+        }
+
+        /* stronger staggered transition for side slide */
+        .reveal.slide-from-left,
+        .reveal.slide-from-right {
+            transition: opacity .6s var(--ease), transform .6s var(--ease);
+        }
+
+        /* side navigation (interactive) */
+        .side-nav {
+            position: fixed;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1600;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: transparent;
+            padding: 8px;
+            pointer-events: auto;
+        }
+
+        .side-nav button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.06);
+            cursor: pointer;
+            transition: transform .18s, box-shadow .18s, background .18s;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        }
+
+        .side-nav button[aria-current="true"] {
+            transform: scale(1.28);
+            background: linear-gradient(180deg,var(--accent), #e28a1a);
+            border-color: rgba(0,0,0,0.12);
+            box-shadow: 0 12px 30px rgba(18,10,40,0.22);
+        }
+
+        .side-nav .label {
+            display: none;
+            font-size: 0.85rem;
+            color: #fff;
+            background: rgba(0,0,0,0.45);
+            padding: 6px 8px;
+            border-radius: 6px;
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+
+        /* show labels on hover / focus for desktop */
+        .side-nav button:hover + .label,
+        .side-nav button:focus + .label {
+            display: block;
+            transform: translateX(-8px);
+        }
+
+        /* responsive: hide side-nav on small screens */
+        @media (max-width: 900px) {
+            .side-nav { display: none; }
+        }
+
+        /* Improve touch behavior when menu open - already have .body-locked but strengthen */
+        .body-locked {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            right: 0;
+            overscroll-behavior: none;
+            touch-action: none;
+            -webkit-overflow-scrolling: auto;
         }
 
         /* floating whatsapp */
@@ -723,6 +984,22 @@
 
             .future-banner {
                 justify-content: center
+            }
+
+            /* NOVO: Responsividade para as features do futuro */
+            .future-features {
+                grid-template-columns: 1fr; /* Empilha os itens em telas menores */
+            }
+
+            /* NOVO: Responsividade para a seção 'future' aprimorada */
+            .future-grid {
+                grid-template-columns: 1fr; /* Empilha em telas menores */
+                gap: 24px;
+            }
+
+            .future-3d-viewers {
+                grid-template-columns: 1fr; /* Empilha os visualizadores */
+                gap: 12px;
             }
 
             .side-pattern {
@@ -1264,6 +1541,12 @@
                 transform: rotate(3.5deg);
             }
 
+            /* NOVO: Responsividade para o rodapé */
+            .footer-grid {
+                grid-template-columns: 1fr; /* Empilha colunas do rodapé */
+                text-align: center;
+            }
+
             /* keep side columns visible but compact */
             .side-column {
                 left: 6px;
@@ -1494,33 +1777,32 @@
         </div>
     </nav>
 
-    <section class="hero" id="hero" role="region" aria-label="Hero">
-        <div class="hero-content container">
-            <h1 id="hero-title">Remodelando o futuro do gás natural no Brasil</h1>
-            <p id="hero-sub">Inovação tecnológica e excelência operacional no setor energético</p>
-        </div>
+    <section class="hero" id="hero" role="region" aria-label="Destaques da Ágil Energia">
+        <div class="hero-slider" id="hero-slider"></div>
+        <div class="hero-pagination" id="hero-pagination"></div>
     </section>
-
 
 
     <main>
         <section id="home" class="reveal">
             <div class="container card">
+                <img src="img/logo-footerbk.png" alt="Logo Ágil Energia" class="floating-logo" aria-hidden="true">
                 <h2 class="section-title" id="title-whoweare">Quem Somos</h2>
                 <div id="home-content" class="content-text"></div>
 
                 <div class="values-grid" aria-hidden="false">
                     <div class="value">
+                        <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
                         <h3 id="val-title-tech">Excelência Técnica</h3>
-                        <p id="val-desc-tech" class="muted">Utilizamos as mais avançadas tecnologias de processamento sísmico e imageamento
-                            geofísico.</p>
+                        <p id="val-desc-tech" class="muted">Utilizamos as mais avançadas tecnologias de processamento sísmico e imageamento geofísico.</p>
                     </div>
                     <div class="value">
+                        <div class="icon"><i class="fa-solid fa-seedling"></i></div>
                         <h3 id="val-title-sust">Sustentabilidade</h3>
-                        <p id="val-desc-sust" class="muted">Compromisso com práticas ambientalmente responsáveis e desenvolvimento
-                            sustentável.</p>
+                        <p id="val-desc-sust" class="muted">Compromisso com práticas ambientalmente responsáveis e desenvolvimento sustentável.</p>
                     </div>
                     <div class="value">
+                        <div class="icon"><i class="fa-solid fa-rocket"></i></div>
                         <h3 id="val-title-innv">Inovação</h3>
                         <p id="val-desc-innv" class="muted">Investimento contínuo em tecnologias e metodologias de ponta.</p>
                     </div>
@@ -1530,8 +1812,27 @@
 
         <section class="future-banner" role="region" aria-label="Futuro">
             <div class="future-inner container">
-                <h2 id="future-title">A energia do futuro hoje</h2>
+                <h2 id="future-title" style="color: var(--p3);">A energia do futuro hoje</h2>
                 <p id="future-sub">Estamos por trás do gás que move a sua vida</p>
+
+                <!-- NOVO: Features adicionadas -->
+                <div class="future-features" aria-hidden="false">
+                    <div class="future-item">
+                        <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <h4 id="future-feat-1-title">Análise de Dados</h4>
+                        <p id="future-feat-1-desc">Aplicamos IA e algoritmos avançados para reprocessar dados sísmicos e revelar novas oportunidades.</p>
+                    </div>
+                    <div class="future-item">
+                        <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+                        <h4 id="future-feat-2-title">Precisão e Risco</h4>
+                        <p id="future-feat-2-desc">Nossa tecnologia de imageamento aumenta a precisão e reduz significativamente o risco exploratório.</p>
+                    </div>
+                    <div class="future-item">
+                        <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
+                        <h4 id="future-feat-3-title">Inovação Contínua</h4>
+                        <p id="future-feat-3-desc">Investimos constantemente em P&D para estar na vanguarda da exploração energética no Brasil.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1580,42 +1881,36 @@
                 </div>
 
                 <aside class="gas-video" aria-label="Vídeo explicativo">
-                    <div class="video-thumb" id="gas-thumb" style="background-image:url('img/hero-energia.jpg')"
-                        data-video="videos/agil-hamming-question.mp4">
-                        <button class="video-play" aria-label="Assistir vídeo" id="gas-play"><i
-                                class="fa-solid fa-play"></i></button>
+                    <div class="video-thumb" id="gas-thumb" style="background-image:url('img/logo-footerbk.png')"
+                        data-video-src="videos/agil-hamming-question.mp4" role="button" tabindex="0" aria-describedby="gas-video-caption">
+                        <button class="video-play" id="gas-play" aria-label="Reproduzir vídeo"><i class="fa-solid fa-play"></i></button>
                     </div>
-                    <div class="video-caption" id="gas-video-caption">Assista: Gás Natural Onshore — visão geral e impacto para o Brasil</div>
+                    <p class="video-caption" id="gas-video-caption">Assista: Gás Natural Onshore — visão geral e impacto para o Brasil</p>
                 </aside>
             </div>
         </section>
+
         <section id="team" class="reveal">
             <div class="container card">
                 <h2 class="section-title" id="title-team">Nossa Equipe</h2>
-                <div class="team-grid">
+                <div class="team-grid" aria-hidden="false">
                     <div class="member">
-                        <h3>Dr. João Silva</h3>
-                        <div id="team-1-role" class="muted">CEO e Fundador</div>
-                        <p id="team-1-desc" class="muted">Com mais de 25 anos de experiência no setor de óleo e gás, liderou projetos de
-                            exploração em diversas bacias sedimentares brasileiras.</p>
-                        <a id="team-1-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener"><i
-                                class="fab fa-linkedin"></i> LinkedIn</a>
+                        <img src="img/team-1.jpg" alt="Foto de João Silva" loading="lazy" style="width:100%; border-radius: 8px; margin-bottom: 12px;">
+                        <h3>João Silva</h3>
+                        <p id="team-1-role" class="link-ghost" style="font-weight:700">CEO e Fundador</p>
+                        <p id="team-1-desc" class="muted">Com mais de 25 anos de experiência no setor de óleo e gás, liderou projetos de exploração em diversas bacias sedimentares brasileiras.</p>
                     </div>
                     <div class="member">
-                        <h3>Eng. Maria Santos</h3>
-                        <div id="team-2-role" class="muted">Diretora de Operações</div>
-                        <p id="team-2-desc" class="muted">Engenheira de Petróleo com MBA em Gestão de Projetos, atuou em grandes
-                            operações nacionais e internacionais.</p>
-                        <a id="team-2-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener"><i
-                                class="fab fa-linkedin"></i> LinkedIn</a>
+                        <img src="img/team-2.jpg" alt="Foto de Maria Oliveira" loading="lazy" style="width:100%; border-radius: 8px; margin-bottom: 12px;">
+                        <h3>Maria Oliveira</h3>
+                        <p id="team-2-role" class="link-ghost" style="font-weight:700">Diretora de Operações</p>
+                        <p id="team-2-desc" class="muted">Engenheira de Petróleo com MBA em Gestão de Projetos, atuou em grandes operações nacionais e internacionais.</p>
                     </div>
                     <div class="member">
-                        <h3>Dr. Carlos Oliveira</h3>
-                        <div id="team-3-role" class="muted">Diretor Técnico</div>
-                        <p id="team-3-desc" class="muted">Geofísico com doutorado em Processamento Sísmico, referência em imageamento da
-                            subsuperfície.</p>
-                        <a id="team-3-link" class="link-ghost" href="https://www.linkedin.com" target="_blank" rel="noopener"><i
-                                class="fab fa-linkedin"></i> LinkedIn</a>
+                        <img src="img/team-3.jpg" alt="Foto de Carlos Pereira" loading="lazy" style="width:100%; border-radius: 8px; margin-bottom: 12px;">
+                        <h3>Carlos Pereira</h3>
+                        <p id="team-3-role" class="link-ghost" style="font-weight:700">Diretor Técnico</p>
+                        <p id="team-3-desc" class="muted">Geofísico com doutorado em Processamento Sísmico, referência em imageamento da subsuperfície.</p>
                     </div>
                 </div>
             </div>
@@ -1624,17 +1919,43 @@
         <section id="future" class="reveal">
             <div class="container card">
                 <h2 class="section-title" id="title-future">Remodelando o Futuro do Gás Natural</h2>
-                <div id="future-content" class="content-text"></div>
+                <div class="future-grid">
+                    <div class="future-text-content">
+                        <div id="future-content" class="content-text" style="font-size: 1rem;"></div>
+                        <div class="future-tech-list">
+                            <div class="future-tech-item">
+                                <div class="icon"><i class="fa-solid fa-wave-square"></i></div>
+                                <div>
+                                    <h4>CRS (Common Reflection Surface)</h4>
+                                    <p>Técnica avançada que aprimora a qualidade da imagem sísmica em áreas de geologia complexa, sem a necessidade de um modelo de velocidade preciso.</p>
+                                </div>
+                            </div>
+                            <div class="future-tech-item">
+                                <div class="icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                                <div>
+                                    <h4>Migrações Avançadas (PSDM)</h4>
+                                    <p>Utilizamos migração em profundidade (Pre-Stack Depth Migration) para posicionar corretamente os refletores sísmicos, reduzindo o risco exploratório.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="future-3d-viewers" id="viewers-container">
+                        <div class="viewer-3d" style="background-image: url('img/solo-03.png');"></div>
+                        <div class="viewer-3d" style="background-image: url('img/solo-04.png');"></div>
+                    </div>
+                </div>
             </div>
         </section>
-
 
         <section id="ethics" class="reveal">
             <div class="container card">
                 <h2 class="section-title" id="title-ethics">Código de Ética e Conduta</h2>
                 <div id="ethics-content" class="content-text"></div>
-                <p style="margin-top:16px"><a id="ethics-download-link" href="pdfs/codigo-de-etica.pdf" class="link-ghost" download><i
-                            class="fa fa-download"></i> Baixar Código de Ética (PDF)</a></p>
+                <div style="text-align:center; margin-top:24px;">
+                    <a href="docs/codigo-etica.pdf" class="link-ghost" id="ethics-download-link" download>
+                        <i class="fa-solid fa-download"></i> Baixar Código de Ética (PDF)
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -1642,53 +1963,65 @@
             <div class="container card">
                 <h2 class="section-title" id="title-news">Notícias</h2>
                 <div class="news-list">
-                    <article class="news-item">
-                        <h4 id="news-1-title">Parceria que transforma dados em descobertas: Ágil Energia + CImaGeo</h4>
-                        <div id="news-1-date" class="muted">22 de outubro de 2025</div>
-                        <p id="news-1-summary" class="muted">Uma união técnica para extrair mais valor dos dados sísmicos legados.</p>
-                        <a id="news-1-link" class="link-ghost" href="https://www.linkedin.com/feed/update/urn:li:activity:7349040706763505665/" target="_blank" rel="noopener">Leia mais
-                            •</a>
-                    </article>
-                    <article class="news-item">
-                        <h4 id="news-2-title">Exploração onshore mais precisa</h4>
-                        <div id="news-2-date" class="muted">15 de outubro de 2025</div>
-                        <p id="news-2-summary" class="muted">Inovações em aquisição e processamento redefinem oportunidades em terra.</p>
-                        <a id="news-2-link" class="link-ghost" href="https://www.linkedin.com/pulse/explora%C3%A7%C3%A3o-onshore-mais-precisa-como-inova%C3%A7%C3%A3o-na-aquisi%C3%A7%C3%A3o-0ksmf/?trackingId=WAA%2FQYLMRZejtSMsu9R%2BpQ%3D%3D" target="_blank" rel="noopener">Leia mais
-                            •</a>
-                    </article>
+                    <div class="news-item">
+                        <h3 id="news-1-title">Parceria que transforma dados em descobertas: Ágil Energia + CImaGeo</h3>
+                        <p class="muted" id="news-1-date">22 de outubro de 2025</p>
+                        <p id="news-1-summary">Uma união técnica para extrair mais valor dos dados sísmicos legados. <a href="#" class="link-ghost" id="news-1-link">Leia mais •</a></p>
+                    </div>
+                    <div class="news-item">
+                        <h3 id="news-2-title">Exploração onshore mais precisa</h3>
+                        <p class="muted" id="news-2-date">15 de outubro de 2025</p>
+                        <p id="news-2-summary">Inovações em aquisição e processamento redefinem oportunidades em terra. <a href="#" class="link-ghost" id="news-2-link">Leia mais •</a></p>
+                    </div>
                 </div>
             </div>
         </section>
-
-
-        </main>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-grid">
+                <!-- Coluna 1: Logo e Descrição -->
                 <div>
-                    <div class="logo">
-                        <img src="img/logo-footer.png" alt="Ágil Energia logo" loading="lazy">
+                    <div class="logo" style="margin-bottom: 8px;">
+                        <img src="img/logo-footer.png" alt="Ágil Energia logo" loading="lazy" style="height: 48px;">
                     </div>
-                    <p id="footer-subtext" class="muted" style="color:rgba(255,255,255,0.9)">Remodelando o futuro do gás natural no Brasil
-                        através de inovação tecnológica e excelência operacional.</p>
+                    <p id="footer-subtext" class="muted" style="color:rgba(255,255,255,0.9)">Remodelando o futuro do gás natural no Brasil através de inovação tecnológica e excelência operacional.</p>
                 </div>
+                <!-- Coluna 2: Links de Navegação -->
                 <div>
                     <h4 id="footer-title-links" style="color:#fff">Links</h4>
                     <p><a href="#home" class="link-ghost" id="footer-link-quem">Quem Somos</a></p>
                     <p><a href="#team" class="link-ghost" id="footer-link-equipe">Nossa Equipe</a></p>
                 </div>
+                <!-- Coluna 3: Contato -->
                 <div>
                     <h4 id="footer-title-contact" style="color:#fff">Contato</h4>
                     <p class="muted" style="color:rgba(255,255,255,0.9)">contato@agilenergia.com.br</p>
                     <p class="muted" style="color:rgba(255,255,255,0.9)">denunciaetica@agilenergia.com.br</p>
                 </div>
+                <!-- Coluna 4: Redes Sociais -->
+                <div>
+                    <h4 id="footer-title-social" style="color:#fff">Siga-nos</h4>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/%C3%A1gil-energia/posts/?feedView=all" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
             </div>
-
-            <div id="footer-copyright" style="margin-top:18px;text-align:center;color:rgba(255,255,255,0.8)">&copy; 2025 Ágil Energia. Todos
-                os direitos reservados.</div>
+            <div class="footer-bottom" style="margin-top:28px; text-align:center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 22px;">
+                <div id="footer-copyright" style="color:rgba(255,255,255,0.8); margin-bottom: 16px;">&copy; 2025 Ágil Energia. Todos os direitos reservados.</div>
+                <div id="credit-footer" style="display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0.8;">
+                    <span style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">Desenvolvido por</span>
+                    <a href="https://www.confidesign.com.br" target="_blank" rel="noopener noreferrer" title="Confidesign" style="line-height: 1;">
+                        <img src="img/confidesign.png" alt="Confidesign Logo" style="height: 20px; opacity: 0.7; transition: opacity .2s; vertical-align: middle;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
+
+
+
 
     <a class="whatsapp" href="https://wa.me/5584994096262?text=Olá%20Ágil%20Energia!" target="_blank"
         aria-label="Abrir WhatsApp">
@@ -1784,6 +2117,12 @@
                         'hero-sub': 'Inovação tecnológica e excelência operacional no setor energético',
                         'future-title': 'A energia do futuro hoje',
                         'future-sub': 'Estamos por trás do gás que move a sua vida',
+                        'future-feat-1-title': 'Análise de Dados',
+                        'future-feat-1-desc': 'Aplicamos IA e algoritmos avançados para reprocessar dados sísmicos e revelar novas oportunidades.',
+                        'future-feat-2-title': 'Precisão e Risco',
+                        'future-feat-2-desc': 'Nossa tecnologia de imageamento aumenta a precisão e reduz significativamente o risco exploratório.',
+                        'future-feat-3-title': 'Inovação Contínua',
+                        'future-feat-3-desc': 'Investimos constantemente em P&D para estar na vanguarda da exploração energética no Brasil.',
                         'title-whoweare': 'Quem Somos',
                         'title-team': 'Nossa Equipe',
                         'title-future': 'Remodelando o Futuro do Gás Natural',
@@ -1845,6 +2184,12 @@
                         'hero-sub': 'Technological innovation and operational excellence in the energy sector',
                         'future-title': 'The energy of the future today',
                         'future-sub': 'We are behind the gas that powers your life',
+                        'future-feat-1-title': 'Data Analysis',
+                        'future-feat-1-desc': 'We apply AI and advanced algorithms to reprocess seismic data and uncover new opportunities.',
+                        'future-feat-2-title': 'Precision & Risk',
+                        'future-feat-2-desc': 'Our imaging technology increases accuracy and significantly reduces exploratory risk.',
+                        'future-feat-3-title': 'Continuous Innovation',
+                        'future-feat-3-desc': 'We constantly invest in R&D to be at the forefront of energy exploration in Brazil.',
                         'title-whoweare': 'Who We Are',
                         'title-team': 'Our Team',
                         'title-future': 'Reshaping the Future of Natural Gas',
@@ -2040,13 +2385,7 @@
 
             /* ---------- Hero parallax ---------- */
             safe(() => {
-               
-                const hero = document.querySelector('.hero');
-                if (!hero) return;
-                window.addEventListener('scroll', () => {
-                    const y = window.scrollY || 0;
-                    hero.style.backgroundPosition = `center ${Math.max(-40, y * 0.12)}px`;
-                }, { passive: true });
+                // Este efeito agora é controlado pela função `updateParallax` mais abaixo, que é mais completa.
             });
 
             /* ---------- Side columns (primary + secondary) ---------- */
@@ -2210,6 +2549,84 @@
 
             });
 
+            /* ---------- Hero Slider ---------- */
+            safe(() => {
+                const sliderContainer = document.getElementById('hero-slider');
+                const paginationContainer = document.getElementById('hero-pagination');
+                if (!sliderContainer || !paginationContainer) return;
+
+                const slidesData = [
+                    { img: 'img/tubulacao-01.jpeg', title: 'Inovação que Conecta o Brasil', sub: 'Desenvolvemos infraestrutura energética essencial para o progresso do país, com segurança e tecnologia de ponta.' },
+                    { img: 'img/tubulacao-02.jpeg', title: 'Visão de Futuro, Ação no Presente', sub: 'Nossos projetos são planejados para garantir o suprimento de gás natural de forma sustentável para as próximas gerações.' },
+                    { img: 'img/tubulacao-03.jpeg', title: 'Excelência Operacional em Campo', sub: 'Monitoramento contínuo e equipes especializadas asseguram a máxima eficiência e integridade de nossas operações.' },
+                    { img: 'img/tubulacao-04.png', title: 'Energia Limpa para um Mundo Melhor', sub: 'O gás natural é a ponte para um futuro energético com menor impacto ambiental, e estamos liderando essa transição.' }
+                ];
+
+                let currentSlide = 0;
+                let slideInterval;
+
+                function createSlides() {
+                    slidesData.forEach((data, index) => {
+                        // Cria o slide
+                        const slide = document.createElement('div');
+                        slide.className = 'hero-slide';
+                        slide.style.backgroundImage = `url('${data.img}')`;
+                        slide.innerHTML = `
+                            <div class="hero-content container">
+                                <h1>${data.title}</h1>
+                                <p>${data.sub}</p>
+                            </div>
+                        `;
+                        sliderContainer.appendChild(slide);
+
+                        // Cria o ponto de navegação
+                        const dot = document.createElement('button');
+                        dot.className = 'dot';
+                        dot.setAttribute('aria-label', `Ir para o slide ${index + 1}`);
+                        dot.addEventListener('click', () => goToSlide(index));
+                        paginationContainer.appendChild(dot);
+                    });
+                }
+
+                function goToSlide(index) {
+                    currentSlide = index;
+                    document.querySelectorAll('.hero-slide').forEach((s, i) => s.classList.toggle('active', i === index));
+                    document.querySelectorAll('.hero-pagination .dot').forEach((d, i) => d.classList.toggle('active', i === index));
+                    // Reinicia o timer
+                    clearInterval(slideInterval);
+                    slideInterval = setInterval(() => goToSlide((currentSlide + 1) % slidesData.length), 6000);
+                }
+
+                createSlides();
+                goToSlide(0); // Inicia o carrossel
+            });
+
+            /* NOVO: Efeito 3D de inclinação na seção Future */
+            safe(() => {
+                const container = document.getElementById('viewers-container');
+                if (!container) return;
+
+                container.addEventListener('mousemove', (e) => {
+                    const viewers = container.querySelectorAll('.viewer-3d');
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const rotateX = (y / rect.height - 0.5) * -15; // Inclinação vertical (máx 7.5 graus)
+                    const rotateY = (x / rect.width - 0.5) * 15;  // Inclinação horizontal (máx 7.5 graus)
+
+                    viewers.forEach(viewer => {
+                        viewer.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+                    });
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    container.querySelectorAll('.viewer-3d').forEach(viewer => {
+                        viewer.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+                    });
+                });
+            });
+
         })(); 
     </script>
     <script>
@@ -2220,8 +2637,8 @@
             function openVideoModal(src) {
                 if (!src) return;
                 // create modal
-                const modal = document.createElement('div');
-                modal.className = 'video-modal';
+                const modal = document.createElement('div'); 
+                modal.className = 'video-modal'; 
                 modal.innerHTML = `
                 <div class="frame" role="dialog" aria-modal="true">
                     <button class="close" aria-label="Fechar">✕</button>
@@ -2243,10 +2660,10 @@
             if (playBtn) {
                 playBtn.addEventListener('click', function () {
                     const thumb = document.getElementById('gas-thumb');
-                    const src = thumb && thumb.getAttribute('data-video');
+                    const src = thumb && thumb.getAttribute('data-video-src');
                     // if user left placeholder VIDEO_ID, do nothing and log
                     if (src && src.indexOf('VIDEO_ID') !== -1) {
-                        // replace placeholder with a real id or inform user
+                        // se o ID do vídeo não foi substituído, avise no console
                         console.warn('Gas video: replace VIDEO_ID in data-video attribute with a valid YouTube id.');
                     }
                     openVideoModal(src);
