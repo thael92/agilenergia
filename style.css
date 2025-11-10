@@ -599,6 +599,15 @@ button {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+.about-section .brazil-map video {
+    max-width: 700px;
+    /* Limita a largura máxima em desktop */
+    width: 100%; /* Garante que o vídeo seja responsivo */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 .about-section .brazil-map p {
     margin-top: 25px;
     /* Ajustado o espaçamento */
