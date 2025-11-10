@@ -44,14 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (element === heroTitle) {
                     typingEffect(element, element.dataset.langEn);
                 } else {
-                    element.textContent = element.dataset.langEn;
+                    element.innerHTML = element.dataset.langEn;
                 }
             } else if (currentLang === 'pt' && element.dataset.langPt) {
                 // Se for o título do hero, aplica o efeito de digitação
                 if (element === heroTitle) {
                     typingEffect(element, element.dataset.langPt);
                 } else {
-                    element.textContent = element.dataset.langPt;
+                    element.innerHTML = element.dataset.langPt;
                 }
             }
         });
@@ -127,22 +127,50 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
-    // Team member bio expansion
+    // Team member bio modal
+    const teamModal = document.getElementById('teamMemberModal');
+    if (teamModal) {
+        const modalContent = teamModal.querySelector('.team-modal-content');
+        const modalImg = teamModal.querySelector('.modal-img');
+        const modalName = teamModal.querySelector('.modal-name');
+        const modalRole = teamModal.querySelector('.modal-role');
+        const modalBio = teamModal.querySelector('.modal-bio');
+        const closeButton = teamModal.querySelector('.close-button');
+
+        const closeModal = () => {
+            teamModal.classList.remove('open');
+            document.body.style.overflow = '';
+        };
+
+        closeButton.addEventListener('click', closeModal);
+        teamModal.addEventListener('click', (e) => {
+            if (e.target === teamModal) {
+                closeModal();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && teamModal.classList.contains('open')) {
+                closeModal();
+            }
+        });
+    }
+
     document.querySelectorAll('.team-member').forEach(memberCard => {
         const readMoreBtn = memberCard.querySelector('.read-more-btn');
-        const fullBioContent = memberCard.querySelector('.full-bio-content');
-        const shortBio = memberCard.querySelector('.short-bio');
 
         readMoreBtn.addEventListener('click', () => {
-            if (fullBioContent.classList.contains('expanded')) {
-                fullBioContent.classList.remove('expanded');
-                shortBio.style.display = 'block';
-                readMoreBtn.dataset.lang === 'en' ? readMoreBtn.textContent = 'Read More' : readMoreBtn.textContent = 'Ler Mais';
-            } else {
-                fullBioContent.classList.add('expanded');
-                shortBio.style.display = 'none';
-                readMoreBtn.dataset.lang === 'en' ? readMoreBtn.textContent = 'Read Less' : readMoreBtn.textContent = 'Ler Menos';
-            }
+            const imgSrc = memberCard.querySelector('img').src;
+            const name = memberCard.querySelector('h3').textContent;
+            const role = memberCard.querySelector('.role').textContent;
+            const bioHtml = memberCard.querySelector('.full-bio-content').innerHTML;
+
+            teamModal.querySelector('.modal-img').src = imgSrc;
+            teamModal.querySelector('.modal-name').textContent = name;
+            teamModal.querySelector('.modal-role').textContent = role;
+            teamModal.querySelector('.modal-bio').innerHTML = bioHtml;
+
+            teamModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
         });
     });
 

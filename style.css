@@ -52,6 +52,13 @@ button {
     font-family: inherit;
 }
 
+/* Link in text */
+.text-link {
+    color: var(--secondary-color); /* Roxo */
+    font-weight: 600;
+    text-decoration: underline;
+}
+
 /* Buttons */
 .btn {
     padding: 12px 25px;
@@ -495,14 +502,10 @@ button {
     text-align: center;
     margin-bottom: 60px;
     position: relative;
-    padding: 15px 30px;
-    /* Adiciona espaço interno para a borda */
-    display: inline-block;
-    /* Ajusta o container ao texto */
-    left: 50%;
-    /* Centraliza o elemento */
-    transform: translateX(-50%);
-    /* Centraliza o elemento */
+    padding: 15px 30px; /* Adiciona espaço interno para a borda */
+    display: table; /* Permite que o elemento se ajuste ao conteúdo */
+    margin-left: auto; /* Centraliza o elemento */
+    margin-right: auto; /* Centraliza o elemento */
 }
 
 .section-title::after {
@@ -1677,6 +1680,104 @@ button {
     .about-section .brazil-map img {
         max-width: 700px;
         /* Define um limite máximo fixo para evitar distorção */
+    }
+}
+
+/* Team Member Modal Styles */
+.team-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 20px;
+}
+
+.team-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.team-modal-content {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.team-modal.open .team-modal-content {
+    transform: scale(1);
+}
+
+.team-modal .close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2.5rem;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.team-modal .close-button:hover {
+    color: var(--dark-gray);
+}
+
+.team-modal .modal-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid var(--primary-color);
+}
+
+.team-modal .modal-name {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.team-modal .modal-role {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.team-modal .modal-bio {
+    font-size: 1rem;
+    line-height: 1.8;
+    text-align: left;
+    color: var(--text-color);
+    white-space: pre-wrap; /* Preserva as quebras de linha do HTML */
+}
+
+@media (max-width: 768px) {
+    .team-modal-content {
+        padding: 30px;
+    }
+    .team-modal .modal-name {
+        font-size: 1.8rem;
     }
 }
 
