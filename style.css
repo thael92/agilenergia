@@ -1,7 +1,9 @@
 /* Basic Resets & Global Styles */
 :root {
-    --primary-color: #F5A623; /* Laranja vibrante */
-    --secondary-color: #4A1D6E; /* Roxo profundo */
+    --primary-color: #F5A623;
+    /* Laranja vibrante */
+    --secondary-color: #4A1D6E;
+    /* Roxo profundo */
     --light-gray: #f4f4f4;
     --dark-gray: #333;
     --white: #fff;
@@ -24,7 +26,8 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     color: var(--text-color);
-    background-color: transparent; /* Alterado para transparente */
+    background-color: transparent;
+    /* Alterado para transparente */
 }
 
 .container {
@@ -97,7 +100,8 @@ button {
 
 .main-header .logo {
     color: var(--secondary-color);
-    max-height: 40px; /* Adjust as needed */
+    max-height: 40px;
+    /* Adjust as needed */
     width: auto;
     object-fit: contain;
 }
@@ -155,7 +159,8 @@ button {
     color: var(--white);
     text-align: center;
     overflow: hidden;
-    background-color: transparent; /* Fundo transparente */
+    background-color: transparent;
+    /* Fundo transparente */
 }
 
 .hero-section .video-background {
@@ -186,26 +191,31 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(74, 29, 110, 0.75), rgba(245, 166, 35, 0.75)); /* Roxo para Laranja, opacidade ligeiramente maior */
+    background: linear-gradient(45deg, rgba(74, 29, 110, 0.75), rgba(245, 166, 35, 0.75));
+    /* Roxo para Laranja, opacidade ligeiramente maior */
     z-index: -1;
 }
 
 .hero-section .hero-content {
     position: relative;
     z-index: 1;
-    padding-top: 80px; /* Offset for fixed header */
+    padding-top: 80px;
+    /* Offset for fixed header */
     padding-left: 20px;
     padding-right: 20px;
 }
 
 .hero-section h1 {
     font-family: var(--font-heading);
-    font-size: 3.8rem; /* Aumentado ligeiramente para desktop */
+    font-size: 3.8rem;
+    /* Aumentado ligeiramente para desktop */
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
-    position: relative; /* Necessário para o cursor */
-    display: inline-block; /* Ajusta o container ao texto */
+    position: relative;
+    /* Necessário para o cursor */
+    display: inline-block;
+    /* Ajusta o container ao texto */
 }
 
 /* Cursor de digitação */
@@ -219,12 +229,20 @@ button {
 }
 
 @keyframes blink-caret {
-    from, to { opacity: 1; }
-    50% { opacity: 0; }
+
+    from,
+    to {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 .hero-section p {
-    font-size: 1.4rem; /* Aumentado ligeiramente para desktop */
+    font-size: 1.4rem;
+    /* Aumentado ligeiramente para desktop */
     margin-bottom: 40px;
 }
 
@@ -236,6 +254,8 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
+    display: none;
+    /* Oculto por padrão */
 }
 
 .scroll-indicator span {
@@ -256,9 +276,20 @@ button {
 }
 
 @keyframes scrollAnimation {
-    0% { transform: translateY(0); opacity: 1; }
-    50% { transform: translateY(10px); opacity: 0.5; }
-    100% { transform: translateY(0); opacity: 1; }
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(10px);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Media Queries for Responsiveness */
@@ -267,40 +298,48 @@ button {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.5s ease-in-out;
-        /* display: none; */ /* Removed to allow max-height transition */
+        /* display: none; */
+        /* Removed to allow max-height transition */
         flex-direction: column;
         position: absolute;
-        top: 70px; /* Adjust based on header height */
+        top: 70px;
+        /* Adjust based on header height */
         left: 0;
         width: 100%;
         background-color: rgba(255, 255, 255, 0.98);
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        padding: 0; /* Will be adjusted when active */
+        padding: 0;
+        /* Will be adjusted when active */
         border-top: 1px solid var(--light-gray);
     }
 
     .main-header .main-nav.active {
-        max-height: 500px; /* Adjust to content height - ensure it's larger than actual content */
+        max-height: 500px;
+        /* Adjust to content height - ensure it's larger than actual content */
         padding: 20px 0;
-        display: flex; /* Ensure flex is applied when active */
+        display: flex;
+        /* Ensure flex is applied when active */
     }
 
     .main-header .main-nav li {
-        margin: 15px 0; /* Increased vertical margin for better spacing */
+        margin: 15px 0;
+        /* Increased vertical margin for better spacing */
         text-align: center;
     }
 
     .main-header .main-nav a {
-        font-size: 1.2rem; /* Larger font size for mobile nav links */
+        font-size: 1.2rem;
+        /* Larger font size for mobile nav links */
         font-weight: 700;
         padding: 10px 0;
         display: block;
     }
 
-    .main-header .main-nav a:hover, 
+    .main-header .main-nav a:hover,
     .main-header .main-nav a.active {
         color: var(--primary-color);
-        background-color: var(--light-gray); /* Highlight on hover/active */
+        background-color: var(--light-gray);
+        /* Highlight on hover/active */
     }
 
     /* Overlay for mobile menu */
@@ -311,15 +350,18 @@ button {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-        z-index: 999; /* Below the menu, above content */
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Semi-transparent black overlay */
+        z-index: 999;
+        /* Below the menu, above content */
         transition: opacity 0.3s ease;
         opacity: 0;
         pointer-events: none;
     }
 
     body.menu-open .main-header .main-nav {
-        z-index: 1001; /* Ensure menu is above overlay */
+        z-index: 1001;
+        /* Ensure menu is above overlay */
     }
 
     body.menu-open::before {
@@ -328,7 +370,8 @@ button {
     }
 
     .hamburger-menu {
-        display: flex; /* Always flex by default */
+        display: flex;
+        /* Always flex by default */
         flex-direction: column;
         justify-content: space-around;
         width: 30px;
@@ -338,10 +381,14 @@ button {
         cursor: pointer;
         padding: 0;
         margin-left: 20px;
-        opacity: 1; /* Ensure it's visible by default */
-        pointer-events: auto; /* Allow clicks by default */
-        transition: opacity 0.3s ease; /* Smooth transition for hide/show */
-        z-index: 1100; /* Ensure it's above other elements */
+        opacity: 1;
+        /* Ensure it's visible by default */
+        pointer-events: auto;
+        /* Allow clicks by default */
+        transition: opacity 0.3s ease;
+        /* Smooth transition for hide/show */
+        z-index: 1100;
+        /* Ensure it's above other elements */
     }
 
     .hamburger-menu span {
@@ -355,9 +402,11 @@ button {
     .hamburger-menu.open span:nth-child(1) {
         transform: translateY(11px) rotate(45deg);
     }
+
     .hamburger-menu.open span:nth-child(2) {
         opacity: 0;
     }
+
     .hamburger-menu.open span:nth-child(3) {
         transform: translateY(-11px) rotate(-45deg);
     }
@@ -377,15 +426,18 @@ button {
 
 @media (max-width: 768px) {
     .main-header .btn-secondary {
-        display: none; /* Hide secondary CTA on smaller screens */
+        display: none;
+        /* Hide secondary CTA on smaller screens */
     }
 
     .hero-section h1 {
-        font-size: 2.5rem; /* Further reduce font size for tablets */
+        font-size: 2.5rem;
+        /* Further reduce font size for tablets */
     }
 
     .hero-section p {
-        font-size: 1.2rem; /* Further reduce font size for tablets */
+        font-size: 1.2rem;
+        /* Further reduce font size for tablets */
     }
 }
 
@@ -403,11 +455,13 @@ button {
     }
 
     .hero-section h1 {
-        font-size: 2rem; /* Even smaller for mobile */
+        font-size: 2rem;
+        /* Even smaller for mobile */
     }
 
     .hero-section p {
-        font-size: 1rem; /* Even smaller for mobile */
+        font-size: 1rem;
+        /* Even smaller for mobile */
     }
 
     .btn {
@@ -419,12 +473,18 @@ button {
 /* General Section Padding */
 .section-padding {
     padding: 80px 0;
-    background-color: var(--light-gray); /* Cor de fundo clara */
-    background-image: url('img/textura de topografia.jpeg'); /* Imagem de textura */
-    background-repeat: repeat; /* Repete a textura */
-    background-size: auto; /* Tamanho natural da imagem de textura */
-    background-blend-mode: multiply; /* Mescla a imagem com a cor de fundo */
-    position: relative; /* Garante que o conteúdo da seção fique sobre o fundo */
+    background-color: var(--light-gray);
+    /* Cor de fundo clara */
+    background-image: url('img/textura de topografia.jpeg');
+    /* Imagem de textura */
+    background-repeat: repeat;
+    /* Repete a textura */
+    background-size: 65%;
+    /* Aumenta o tamanho da textura para ser menos repetitiva */
+    background-blend-mode: multiply;
+    /* Mescla a imagem com a cor de fundo */
+    position: relative;
+    /* Garante que o conteúdo da seção fique sobre o fundo */
 }
 
 .section-title {
@@ -435,30 +495,75 @@ button {
     text-align: center;
     margin-bottom: 60px;
     position: relative;
+    padding: 15px 30px;
+    /* Adiciona espaço interno para a borda */
+    display: inline-block;
+    /* Ajusta o container ao texto */
+    left: 50%;
+    /* Centraliza o elemento */
+    transform: translateX(-50%);
+    /* Centraliza o elemento */
 }
 
 .section-title::after {
     content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: var(--primary-color);
-    margin: 15px auto 0;
-    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Animação da linha vertical direita e esquerda 
+    border-left: 4px solid var(--primary-color);
+    border-right: 4px solid var(--primary-color);*/
+    animation: draw-vertical 1s 1s forwards;
+    /* Começa após a horizontal */
+    transform: scaleY(0);
+    transform-origin: top;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Animação da linha horizontal superior e inferior */
+    border-top: 4px solid var(--primary-color);
+    border-bottom: 4px solid var(--primary-color);
+    animation: draw-horizontal 1s forwards;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+/* Animações para desenhar a borda */
+@keyframes draw-horizontal {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes draw-vertical {
+    to {
+        transform: scaleY(1);
+    }
 }
 
 /* About Section */
 .about-section .container {
     display: flex;
-    flex-direction: column; /* Coloca os itens em coluna por padrão */
+    flex-direction: column;
+    /* Coloca os itens em coluna por padrão */
     gap: 40px;
     align-items: center;
 }
 
 .about-section .about-text {
     text-align: center;
-    max-width: 800px; /* Limita a largura do texto para melhor leitura */
-    margin-bottom: 20px; /* Espaçamento entre texto e mapa */
+    max-width: 800px;
+    /* Limita a largura do texto para melhor leitura */
+    margin-bottom: 20px;
+    /* Espaçamento entre texto e mapa */
 }
 
 .about-section .about-text p {
@@ -469,16 +574,20 @@ button {
 
 .about-section .brazil-map {
     text-align: center;
-    margin-top: 20px; /* Espaçamento entre texto e mapa */
-    margin-bottom: 40px; /* Espaçamento entre mapa e cards */
+    margin-top: 20px;
+    /* Espaçamento entre texto e mapa */
+    margin-bottom: 40px;
+    /* Espaçamento entre mapa e cards */
 }
 
 .about-section .brazil-map img {
-    max-width: 800px; /* Limita a largura máxima em desktop */
+    max-width: 800px;
+    /* Limita a largura máxima em desktop */
     height: auto;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    cursor: pointer; /* Indica que a imagem é clicável */
+    cursor: pointer;
+    /* Indica que a imagem é clicável */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -488,7 +597,8 @@ button {
 }
 
 .about-section .brazil-map p {
-    margin-top: 25px; /* Ajustado o espaçamento */
+    margin-top: 25px;
+    /* Ajustado o espaçamento */
     font-size: 1.1rem;
     color: var(--dark-gray);
 }
@@ -497,8 +607,10 @@ button {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    max-width: 900px; /* Limita a largura do bloco de cards */
-    margin-top: 40px; /* Espaçamento do mapa */
+    max-width: 900px;
+    /* Limita a largura do bloco de cards */
+    margin-top: 40px;
+    /* Espaçamento do mapa */
 }
 
 .about-section .card {
@@ -564,8 +676,9 @@ button {
     .about-section .brazil-map {
         margin-top: 20px;
         margin-bottom: 30px;
-        
+
     }
+
     .about-section .brazil-map img {
         max-width: 339px;
     }
@@ -605,7 +718,8 @@ button {
     }
 
     .about-section .about-cards-wrapper {
-        grid-template-columns: 1fr; /* Um card por linha em telas menores */
+        grid-template-columns: 1fr;
+        /* Um card por linha em telas menores */
         gap: 15px;
     }
 
@@ -655,7 +769,8 @@ button {
 
 /* Team Section */
 .team-section {
-    background-color: transparent; /* Fundo transparente */
+    background-color: transparent;
+    /* Fundo transparente */
 }
 
 .team-grid {
@@ -721,7 +836,8 @@ button {
     display: inline-block;
     font-size: 1.2rem;
     color: var(--white);
-    background-color: #0077B5; /* LinkedIn Blue */
+    background-color: #0077B5;
+    /* LinkedIn Blue */
     width: 35px;
     height: 35px;
     line-height: 35px;
@@ -741,7 +857,8 @@ button {
 }
 
 .team-member .full-bio-content.expanded {
-    max-height: 500px; /* Adjust as needed */
+    max-height: 500px;
+    /* Adjust as needed */
     opacity: 1;
     margin-top: 15px;
 }
@@ -865,16 +982,28 @@ button {
 
 /* Market & Strategy Section */
 .market-strategy-section {
-    background-color: transparent; /* Fundo transparente */
+    background-color: transparent;
+    /* Fundo transparente */
+}
+
+.market-strategy-section .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
 }
 
 .market-strategy-section .strategy-block {
-    margin-bottom: 60px;
+    margin-bottom: 0;
+    /* Removido, pois o gap do grid controla o espaçamento */
     padding: 40px;
     border-radius: 8px;
     background-color: var(--light-gray);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    /* Adicionado para melhor alinhamento interno */
+    flex-direction: column;
+    /* Adicionado para melhor alinhamento interno */
 }
 
 .market-strategy-section .strategy-block:hover {
@@ -896,6 +1025,8 @@ button {
     line-height: 1.8;
     margin-bottom: 30px;
     text-align: center;
+    flex-grow: 1;
+    /* Faz o parágrafo ocupar o espaço disponível, alinhando os diagramas */
 }
 
 .market-strategy-section .diagram-placeholder {
@@ -913,7 +1044,7 @@ button {
 @media (max-width: 768px) {
     .market-strategy-section .strategy-block {
         padding: 30px;
-        margin-bottom: 40px;
+        /* margin-bottom removido */
     }
 
     .market-strategy-section .strategy-block h3 {
@@ -928,7 +1059,7 @@ button {
 @media (max-width: 576px) {
     .market-strategy-section .strategy-block {
         padding: 20px;
-        margin-bottom: 30px;
+        /* margin-bottom removido */
     }
 
     .market-strategy-section .strategy-block h3 {
@@ -942,7 +1073,8 @@ button {
 
 /* Ethics Section */
 .ethics-section {
-    background-color: transparent; /* Fundo transparente */
+    background-color: transparent;
+    /* Fundo transparente */
     text-align: center;
 }
 
@@ -1111,7 +1243,8 @@ button {
 
 /* News Section */
 .news-section {
-    background-color: transparent; /* Fundo transparente */
+    background-color: transparent;
+    /* Fundo transparente */
 }
 
 .news-feed {
@@ -1212,7 +1345,8 @@ button {
 
 /* Contact Section */
 .contact-section {
-    background-color: transparent; /* Fundo transparente */
+    background-color: transparent;
+    /* Fundo transparente */
 }
 
 .contact-content {
@@ -1361,6 +1495,12 @@ button {
     display: block;
 }
 
+.main-footer .footer-brand .logo-footer02 {
+    max-width: 180px; /* Define um tamanho máximo para a logo em telas grandes */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-bottom: 15px;
+}
+
 .main-footer .footer-brand p {
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.7);
@@ -1400,7 +1540,7 @@ button {
 }
 
 /* Copyright */
-.main-footer .container + p {
+.main-footer .container+p {
     text-align: center;
     margin-top: 30px;
     color: rgba(255, 255, 255, 0.6);
@@ -1416,7 +1556,8 @@ button {
     .contact-form,
     .contact-info {
         width: 100%;
-        max-width: 500px; /* Limit width on smaller screens */
+        max-width: 500px;
+        /* Limit width on smaller screens */
     }
 
     .main-footer .container {
@@ -1425,6 +1566,7 @@ button {
 }
 
 @media (max-width: 768px) {
+
     .contact-form,
     .contact-info {
         padding: 30px;
@@ -1463,6 +1605,7 @@ button {
 }
 
 @media (max-width: 576px) {
+
     .contact-form,
     .contact-info {
         padding: 20px;
@@ -1483,6 +1626,11 @@ button {
         margin-right: auto;
     }
 
+    .main-footer .footer-brand .logo-footer02 {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .main-footer .footer-social {
         justify-content: center;
     }
@@ -1493,33 +1641,42 @@ button {
     .main-header .hamburger-menu {
         opacity: 0;
         pointer-events: none;
-        display: none; /* Finally hide it on desktop */
+        display: none;
+        /* Finally hide it on desktop */
     }
 
     .main-header .main-nav {
-        max-height: none; /* Remove max-height restriction on desktop */
+        max-height: none;
+        /* Remove max-height restriction on desktop */
         overflow: visible;
-        padding: 0; /* Reset padding for desktop */
-        display: flex; /* Ensure desktop nav is always flex */
-        flex-direction: row; /* Ensure row direction for desktop nav */
-        position: static; /* Remove absolute positioning on desktop */
+        padding: 0;
+        /* Reset padding for desktop */
+        display: flex;
+        /* Ensure desktop nav is always flex */
+        flex-direction: row;
+        /* Ensure row direction for desktop nav */
+        position: static;
+        /* Remove absolute positioning on desktop */
         box-shadow: none;
         border-top: none;
     }
 
     .main-header .main-nav.active {
-        max-height: none; /* No max-height needed on desktop */
+        max-height: none;
+        /* No max-height needed on desktop */
         padding: 0;
     }
 
     .main-header .main-nav li {
         margin-left: 30px;
-        margin-top: 0; /* Reset margin for desktop */
+        margin-top: 0;
+        /* Reset margin for desktop */
     }
 
     /* Ensure map image has limited width on desktop */
     .about-section .brazil-map img {
-        max-width: 60%; /* Ajuste para que a imagem não fique muito grande */
+        max-width: 700px;
+        /* Define um limite máximo fixo para evitar distorção */
     }
 }
 
@@ -1530,8 +1687,10 @@ button {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -100; /* Garante que fique atrás de todo o conteúdo */
-    background-color: transparent; /* Será preenchido pela animação */
+    z-index: -100;
+    /* Garante que fique atrás de todo o conteúdo */
+    background-color: transparent;
+    /* Será preenchido pela animação */
 }
 
 /* Fullscreen Map Modal Styles */
@@ -1541,11 +1700,13 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro semitransparente */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Fundo escuro semitransparente */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Garante que esteja acima de todo o resto */
+    z-index: 9999;
+    /* Garante que esteja acima de todo o resto */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -1558,22 +1719,26 @@ button {
 
 .fullscreen-modal .modal-content {
     position: relative;
-    max-width: 90vw; /* Usa viewport width */
-    max-height: 90vh; /* Usa viewport height */
+    max-width: 90vw;
+    /* Usa viewport width */
+    max-height: 90vh;
+    /* Usa viewport height */
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
-    align-items: center; /* Centraliza a imagem dentro da modal */
+    align-items: center;
+    /* Centraliza a imagem dentro da modal */
 }
 
 .fullscreen-modal .modal-content img {
     max-width: 100%;
     max-height: 100%;
     display: block;
-    object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
+    object-fit: contain;
+    /* Garante que a imagem se ajuste sem cortar */
 }
 
 .fullscreen-modal .close-button {
