@@ -855,6 +855,11 @@ button {
     .about-section .video-wrapper .click-prompt {
         bottom: -40px;
     }
+
+    .section-padding {
+        /* Aumenta o tamanho da textura em telas menores para melhor legibilidade */
+        background-size: 800px;
+    }
 }
 
 /* Team Section */
@@ -1979,10 +1984,22 @@ button {
     }
 
     /* Ajusta a textura para o modo escuro, tornando-a sutil */
-    .section-padding {
-        background-color: var(--white); /* Usa o fundo escuro principal */
-        /* Inverte a cor da textura (de preto para branco) e a torna muito sutil */
+    .section-padding::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('img/textura de topografia.svg');
+        background-repeat: repeat;
+        background-size: 65%;
         filter: invert(1) opacity(0.05);
+        z-index: 0;
+    }
+
+    .section-padding > .container {
+        position: relative; /* Garante que o conteúdo fique acima da textura */
     }
 
     .main-header {
@@ -2007,15 +2024,23 @@ button {
     .section-title {
         color: var(--primary-color);
         /* Título da seção em laranja para destaque */
-        background-color: var(--light-gray);
+        background-color: #333;
         border-radius: 8px;
     }
 
+    /* Remove a animação da borda no modo escuro para não cobrir o fundo */
+    .section-title::before,
+    .section-title::after {
+        display: none;
+    }
+
+    /* Aplica o fundo de card apenas ao bloco de texto da seção "Quem Somos" */
     .about-section .about-text {
+        background-color: #181a1b; /* Fundo preto sólido para o card */
         background-color: var(--light-gray);
         padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
     .contact-form,
