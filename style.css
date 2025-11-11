@@ -1955,3 +1955,68 @@ button {
 .fullscreen-modal .close-button:hover {
     color: #f00;
 }
+
+/* --- Dark Mode Styles --- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #F5A623;
+        /* Laranja vibrante (mantido) */
+        --secondary-color: #6a3a9c;
+        /* Roxo um pouco mais claro para contraste */
+        --light-gray: #2a2a2e;
+        /* Fundo de cards escuro */
+        --dark-gray: #e0e0e0;
+        /* Texto claro */
+        --white: #1a1a1c;
+        /* Fundo principal escuro */
+        --text-color: #ccc;
+        /* Cor de texto principal */
+    }
+
+    body {
+        background-color: #1a1a1c;
+        /* Fundo escuro sólido */
+    }
+
+    /* Remove a textura no modo escuro para melhor legibilidade */
+    .section-padding {
+        background-image: none;
+    }
+
+    .main-header {
+        background-color: rgba(26, 26, 28, 0.95);
+        /* Header escuro translúcido */
+    }
+
+    .main-header .main-nav a {
+        color: var(--dark-gray);
+        /* Texto do menu claro */
+    }
+
+    .hamburger-menu span {
+        background-color: var(--dark-gray);
+        /* Ícone do menu hamburguer claro */
+    }
+
+    .main-header .main-nav.active {
+        background-color: rgba(42, 42, 46, 0.98);
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        /* Título da seção em laranja para destaque */
+    }
+
+    .contact-form,
+    .contact-info {
+        background-color: var(--light-gray);
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        background-color: #333;
+        color: #fff;
+        border-color: #444;
+    }
+}
