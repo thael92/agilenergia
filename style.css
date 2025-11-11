@@ -1978,9 +1978,11 @@ button {
         /* Fundo escuro sólido */
     }
 
-    /* Remove a textura no modo escuro para melhor legibilidade */
+    /* Ajusta a textura para o modo escuro, tornando-a sutil */
     .section-padding {
-        background-image: none;
+        background-color: var(--white); /* Usa o fundo escuro principal */
+        /* Inverte a cor da textura (de preto para branco) e a torna muito sutil */
+        filter: invert(1) opacity(0.05);
     }
 
     .main-header {
@@ -2005,6 +2007,15 @@ button {
     .section-title {
         color: var(--primary-color);
         /* Título da seção em laranja para destaque */
+        background-color: var(--light-gray);
+        border-radius: 8px;
+    }
+
+    .about-section .about-text {
+        background-color: var(--light-gray);
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
     .contact-form,
