@@ -97,17 +97,19 @@
                 </div>
 
                 <div class="brazil-map animate-on-scroll">
-                    <!-- Placeholder for interactive SVG map -->
-                    <a href="#" id="brazilMapLink" aria-label="Visualizar mapa em tela cheia">
-                        <img src="img/bacias-alvoFoco.png" alt="Mapa do Brasil destacando bacias-alvo">
-                    </a>
-                    <video autoplay loop muted playsinline>
-                        <source src="videos/agil-hamming-question.mp4" type="video/mp4">
-                        Seu navegador não suporta a tag de vídeo.
-                    </video>
-                    <p data-lang-pt="Foco nas principais bacias de gás natural onshore do Brasil."
-                        data-lang-en="Focus on Brazil's main onshore natural gas basins.">Foco nas principais bacias de
-                        gás natural onshore do Brasil.</p>
+                    <div class="video-wrapper">
+                        <video id="backgroundVideo" autoplay loop muted playsinline>
+                            <source src="videos/agil-hamming-question.mp4" type="video/mp4">
+                            Seu navegador não suporta a tag de vídeo.
+                        </video>
+                        <button id="playVideoButton" class="play-video-btn" aria-label="Play Video">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="click-prompt">
+                            <i class="fas fa-hand-point-up"></i>
+                            <span data-lang-pt="Clique para assistir" data-lang-en="Click to watch">Clique para assistir</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="about-cards-wrapper animate-on-scroll">
@@ -585,6 +587,17 @@ During his 18 years at Petrobras, between 2006 and 2024, he held several strateg
             <div class="modal-bio">
                 <!-- Conteúdo da biografia completa será inserido aqui -->
             </div>
+        </div>
+    </div>
+
+    <!-- Modal para Vídeo em Tela Cheia -->
+    <div id="videoModal" class="fullscreen-modal">
+        <div class="modal-content video-modal-content">
+            <span class="close-button">&times;</span>
+            <video id="modalVideo" controls>
+                <source src="videos/agil-hamming-question.mp4" type="video/mp4">
+                Seu navegador não suporta a tag de vídeo.
+            </video>
         </div>
     </div>
 

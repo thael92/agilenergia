@@ -1,7 +1,7 @@
 // JavaScript para funcionalidades futuras
 
 document.addEventListener('DOMContentLoaded', () => {
-    const elementsToTranslate = document.querySelectorAll('[data-lang-pt], [data-en], .main-nav a');
+    const elementsToTranslate = document.querySelectorAll('[data-lang-pt], [data-en]');
 
     // --- Efeito de Digitação ---
     const typingEffect = (element, text, speed = 100) => {
@@ -296,6 +296,37 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === fullscreenModal) {
                 fullscreenModal.classList.remove('open');
                 document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Video Modal Functionality
+    const playVideoButton = document.getElementById('playVideoButton');
+    const videoModal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    const backgroundVideo = document.getElementById('backgroundVideo');
+
+    if (playVideoButton && videoModal && modalVideo) {
+        const closeVideoModal = () => {
+            videoModal.classList.remove('open');
+            document.body.style.overflow = '';
+            modalVideo.pause(); // Pausa o vídeo ao fechar
+            modalVideo.currentTime = 0; // Reinicia o vídeo
+            backgroundVideo.play(); // Retoma o vídeo de fundo
+        };
+
+        playVideoButton.addEventListener('click', () => {
+            videoModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            backgroundVideo.pause(); // Pausa o vídeo de fundo
+            modalVideo.play(); // Inicia o vídeo no modal com som
+        });
+
+        videoModal.querySelector('.close-button').addEventListener('click', closeVideoModal);
+
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeVideoModal();
             }
         });
     }
