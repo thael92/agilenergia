@@ -25,9 +25,14 @@ html {
 body {
     font-family: var(--font-body);
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: transparent;
-    /* Alterado para transparente */
+    color: var(--text-color);    
+    background-image: url('img/textura de topografia.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: var(--light-gray);
+    background-blend-mode: multiply;
 }
 
 .container {
@@ -479,16 +484,7 @@ button {
 /* General Section Padding */
 .section-padding {
     padding: 80px 0;
-    
-    /* Cor de fundo clara */
-    background-image: url('img/textura\ de\ topografia.svg');
-    /* Imagem de textura */
-    background-repeat: repeat;
-    /* Repete a textura */
-    background-size: 65%;
-    /* Aumenta o tamanho da textura para ser menos repetitiva */
-    background-blend-mode: multiply;
-    /* Mescla a imagem com a cor de fundo */
+    background-color: transparent; /* Garante que o fundo da seção seja transparente */
     position: relative;
     /* Garante que o conteúdo da seção fique sobre o fundo */
 }
@@ -891,12 +887,10 @@ button {
 }
 
 .team-member img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 250px;
+    height: 250px;    
     object-fit: cover;
-    margin-bottom: 20px;
-    border: 4px solid var(--primary-color);
+    margin-bottom: 20px;    
     transition: border-color 0.3s ease;
 }
 

@@ -239,9 +239,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (isValid) {
-                // In a real application, you would send this data to a server
-                displayMessage('success', 'Mensagem enviada com sucesso!');
+                const phoneNumber = "5521994507851"; // Número de WhatsApp sem '+' ou espaços
+                const textMessage = `Olá! Gostaria de entrar em contato.\n\n*Nome:* ${name.value}\n*Email:* ${email.value}\n*Assunto:* ${subject.value}\n\n*Mensagem:*\n${message.value}`;
+
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(textMessage)}`;
+
+                // Abre o WhatsApp em uma nova aba
+                window.open(whatsappUrl, '_blank');
+
+                // Exibe mensagem de sucesso e limpa o formulário
+                displayMessage('success', 'Você será redirecionado para o WhatsApp. Obrigado!');
                 contactForm.reset();
+
+                // Opcional: focar na nova janela aberta
+                setTimeout(() => {
+                    const newWindow = window.open(whatsappUrl, '_blank');
+                    if (newWindow) newWindow.focus();
+                }, 100);
             }
         });
     }
