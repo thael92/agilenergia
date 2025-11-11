@@ -198,7 +198,6 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(74, 29, 110, 0.75), rgba(245, 166, 35, 0.75));
     /* Roxo para Laranja, opacidade ligeiramente maior */
     z-index: -1;
 }
