@@ -1960,6 +1960,24 @@ button {
     color: #f00;
 }
 
+/* --- Developed By Section in Footer --- */
+.footer-social .developed-by {
+    margin-top: 20px;
+}
+
+.footer-social .developed-by p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.footer-social .developed-by img {
+    max-width: 150px; /* Define um tamanho máximo para a logo */
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+
 /* --- Dark Mode Styles --- */
 @media (prefers-color-scheme: dark) {
     :root {
@@ -1989,8 +2007,8 @@ button {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-        background-image: url('img/textura de topografia.svg');
+        height: 100vh;
+        background-image: url('img/textura\ de\ topografia.svg');
         background-repeat: repeat;
         background-size: 65%;
         filter: invert(1) opacity(0.05);
