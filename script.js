@@ -8,10 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let i = 0;
         element.innerHTML = ''; // Limpa o texto inicial
         element.classList.add('typing'); // Adiciona a classe para mostrar o cursor
+
         const type = () => {
             if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
+                // Verifica se o próximo caractere é o início de uma tag HTML (como <br>)
+                if (text.charAt(i) === '<') {
+                    const tagEnd = text.indexOf('>', i);
+                    element.innerHTML += text.substring(i, tagEnd + 1);
+                    i = tagEnd + 1;
+                } else {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                }
                 setTimeout(type, speed);
             } else {
                 element.classList.remove('typing'); // Remove a classe ao final da digitação

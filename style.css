@@ -31,7 +31,7 @@ body {
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-    background-color: var(--light-gray);
+   /* background-color: var(--light-gray); */
     background-blend-mode: multiply;
 }
 
@@ -168,7 +168,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--secondary-color); /* Alterado para roxo para melhor contraste */
+    color: var(--secondary-color);
     text-align: center;
     overflow: hidden;
     background-color: transparent;
@@ -202,31 +202,42 @@ button {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    /* Roxo para Laranja, opacidade ligeiramente maior */
-    z-index: -1;
+    height: 100%;    
+    z-index: 0; /* Fica entre a imagem de fundo e o texto */
 }
 
 .hero-section .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Garante que o conteúdo fique na frente do overlay */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
     padding-top: 80px;
     /* Offset for fixed header */
     padding-left: 20px;
     padding-right: 20px;
 }
 
+.hero-text {
+    position: relative; /* Necessário para o posicionamento da imagem no desktop */
+    flex: 0 1 50%; /* Não cresce, pode encolher, base de 50% */
+    text-align: left;
+    max-width: 600px;
+    padding-right: 20px; /* Espaçamento para não colar na imagem */
+}
+
 .hero-section h1 {
     font-family: var(--font-heading);
     font-size: 3.8rem;
-    /* Aumentado ligeiramente para desktop */
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
     position: relative;
     /* Necessário para o cursor */
-    display: inline-block;
-    /* Ajusta o container ao texto */
+    display: block;
+    min-height: 140px; /* Altura mínima para evitar que a imagem se mova */
 }
 
 /* Cursor de digitação */
@@ -253,9 +264,25 @@ button {
 
 .hero-section p {
     font-size: 1.4rem;
-    /* Aumentado ligeiramente para desktop */
     margin-bottom: 40px;    
-    color: var(--text-color); /* Cor de texto mais escura para legibilidade */
+    color: var(--dark-gray); /* Cor de texto mais escura para legibilidade */
+}
+
+.hero-image {
+    margin: 20px 0; /* Espaçamento no mobile */
+        z-index: -10; /* Garante que a imagem fique atrás do texto */
+
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    position: relative; /* Volta para o fluxo normal */
+    transform: none;
+    flex: 1 1 60%; /* Permite que a imagem ocupe mais espaço */
+    max-width: 800px; /* Define o tamanho máximo da imagem */
+    right: 220px; /* Ajusta a posição da imagem */
+    
 }
 
 .scroll-indicator {
@@ -320,11 +347,11 @@ button {
         /* Removed to allow max-height transition */
         flex-direction: column;
         position: absolute;
+        background-color: var(--white);
         top: 70px;
         /* Adjust based on header height */
         left: 0;
         width: 100%;
-        background-color: rgba(255, 255, 255, 0.98);
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         padding: 0;
         /* Will be adjusted when active */
@@ -440,14 +467,34 @@ button {
     .main-header .main-nav ul {
         display: block;
     }
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 120px; /* Mais espaço para o header */
+    }
+
+    .hero-text {
+        text-align: center;
+        max-width: 100%;
+        padding-right: 0; /* Remove o padding da versão desktop */
+    }
+
+    .hero-image img{
+        margin: 30px 0; /* Ajusta o espaçamento vertical no mobile */
+        opacity: 1; /* Garante que a imagem esteja totalmente visível */
+        position: relative; /* Remove o posicionamento absoluto */
+        right: 15px; /* Ajusta a posição da imagem */
+        width: 100%;
+    }
+
+    .hero-section .overlay {
+        /* Adiciona um gradiente para escurecer o fundo e garantir legibilidade */
+        background: none; /* Remove o overlay escuro no mobile */
+    }
 }
 
 @media (max-width: 768px) {
-    .main-header .btn-secondary {
-        display: none;
-        /* Hide secondary CTA on smaller screens */
-    }
-
     .hero-section h1 {
         font-size: 2.5rem;
         /* Further reduce font size for tablets */
@@ -456,7 +503,27 @@ button {
     .hero-section p {
         font-size: 1.2rem;
         /* Further reduce font size for tablets */
+        color: var(--dark-gray); /* Garante a cor correta do texto no mobile */
     }
+}
+
+/* --- Layout Desktop para a Imagem --- */
+@media (min-width: 993px) {
+    .hero-content {
+        align-items: flex-start; /* Alinha o texto no topo */
+    }
+
+    .hero-image {
+        position: absolute; /* Tira a imagem do fluxo do texto */
+        top: 50%;
+        left: 100%; /* Começa à direita do container de texto */
+        transform: translateY(-50%);
+        width: 50vw; /* Largura relativa à tela */
+        max-width: 80%; /* Limita a largura máxima */
+        margin: 0;
+        padding-left: 40px; /* Espaçamento entre texto e imagem */
+    }
+    
 }
 
 @media (max-width: 576px) {
@@ -486,6 +553,7 @@ button {
         padding: 10px 20px;
         font-size: 0.9rem;
     }
+    
 }
 
 /* General Section Padding */
@@ -882,7 +950,7 @@ button {
 }
 
 .team-member {
-    background-color: var(--white);
+    background-color: var(--light-gray);
     padding: 30px;
     text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -1185,7 +1253,7 @@ button {
 }
 
 .ethics-section .card {
-    background-color: var(--white);
+    background-color: var(--light-gray);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
