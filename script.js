@@ -1,7 +1,7 @@
 // JavaScript para funcionalidades futuras
 
 document.addEventListener('DOMContentLoaded', () => {
-    const elementsToTranslate = document.querySelectorAll('[data-lang-pt], [data-en]');
+    const elementsToTranslate = document.querySelectorAll('[data-lang-pt], [data-lang-en], [data-lang-pt-src], [data-lang-en-src]');
 
     // --- Efeito de Digitação ---
     const typingEffect = (element, text, speed = 100) => {
@@ -39,19 +39,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         elementsToTranslate.forEach(element => {
-            if (currentLang === 'en' && element.dataset.langEn) {
-                // Se for o título do hero, aplica o efeito de digitação
-                if (element === heroTitle) {
-                    typingEffect(element, element.dataset.langEn);
-                } else {
-                    element.innerHTML = element.dataset.langEn;
+            if (currentLang === 'en') {
+                // Traduz texto
+                if (element.dataset.langEn) {
+                    if (element === heroTitle) {
+                        typingEffect(element, element.dataset.langEn);
+                    } else {
+                        element.innerHTML = element.dataset.langEn;
+                    }
                 }
-            } else if (currentLang === 'pt' && element.dataset.langPt) {
-                // Se for o título do hero, aplica o efeito de digitação
-                if (element === heroTitle) {
-                    typingEffect(element, element.dataset.langPt);
-                } else {
-                    element.innerHTML = element.dataset.langPt;
+                // Traduz atributos de imagem (src e alt)
+                if (element.dataset.langEnSrc) {
+                    element.src = element.dataset.langEnSrc;
+                }
+                if (element.dataset.langEnAlt) {
+                    element.alt = element.dataset.langEnAlt;
+                }
+            } else { // currentLang === 'pt'
+                // Traduz texto
+                if (element.dataset.langPt) {
+                    if (element === heroTitle) {
+                        typingEffect(element, element.dataset.langPt);
+                    } else {
+                        element.innerHTML = element.dataset.langPt;
+                    }
+                }
+                // Traduz atributos de imagem (src e alt)
+                if (element.dataset.langPtSrc) {
+                    element.src = element.dataset.langPtSrc;
+                }
+                if (element.dataset.langPtAlt) {
+                    element.alt = element.dataset.langPtAlt;
                 }
             }
         });
