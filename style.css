@@ -568,6 +568,10 @@ button {
     max-width: 800px;
     /* Limita a largura do texto para melhor leitura */
     margin-bottom: 20px;
+    background-color: var(--light-gray);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     /* Espaçamento entre texto e mapa */
 }
 
@@ -1839,7 +1843,6 @@ button {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 20px;
-    border: 4px solid var(--primary-color);
 }
 
 .team-modal .modal-name {

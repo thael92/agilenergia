@@ -349,15 +349,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('gasCanvas');
     const ctx = canvas.getContext('2d');
 
+    // Verifica a preferência por modo escuro
+    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
     let particles = [];
     const numParticles = 80; // Número de partículas
     const particleRadius = 1.5; // Raio das partículas
     const maxLineDistance = 120; // Distância máxima para conectar partículas
     const flowSpeed = 0.5; // Velocidade de fluxo das partículas
 
-    const colors = [
-        'rgba(245, 166, 35, 0.7)', // Laranja com transparência
-        'rgba(74, 29, 110, 0.7)'   // Roxo com transparência
+    // Define as cores com base no tema (claro ou escuro)
+    const colors = prefersDarkMode ? [
+        'rgba(245, 166, 35, 0.8)', // Laranja (mais opaco para dark mode)
+        'rgba(170, 100, 220, 0.8)'  // Roxo mais claro e vibrante para dark mode
+    ] : [
+        'rgba(245, 166, 35, 0.7)', // Laranja para light mode
+        'rgba(74, 29, 110, 0.7)'   // Roxo para light mode
     ];
 
     // Função para redimensionar o canvas
@@ -421,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
                     ctx.lineWidth = 0.5; // Linhas sutis
-                    ctx.strokeStyle = `rgba(100, 100, 100, ${(1 - distance / maxLineDistance) * 0.5})`; // Opacidade baseada na distância
+                    ctx.strokeStyle = prefersDarkMode ? `rgba(255, 255, 255, ${(1 - distance / maxLineDistance) * 0.15})` : `rgba(100, 100, 100, ${(1 - distance / maxLineDistance) * 0.5})`;
                     ctx.stroke();
                 }
             }
