@@ -32,7 +32,6 @@ body {
     background-position: center center;
     background-attachment: fixed;
    /* background-color: var(--light-gray); */
-    background-blend-mode: multiply;
 }
 
 .container {
@@ -2068,23 +2067,12 @@ button {
     }
 
     body {
-        background-color: #1a1a1c;
-        /* Fundo escuro sólido */
-    }
-
-    /* Ajusta a textura para o modo escuro, tornando-a sutil */
-    .section-padding::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
+        background-color: #1a1a1c; /* Fundo escuro sólido */
         background-image: url('img/textura\ de\ topografia.svg');
-        background-repeat: repeat;
-        background-size: 65%;
-        filter: invert(1) opacity(0.05);
-        z-index: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
     }
 
     .section-padding > .container {
