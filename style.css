@@ -168,7 +168,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
+    color: var(--secondary-color); /* Alterado para roxo para melhor contraste */
     text-align: center;
     overflow: hidden;
     background-color: transparent;
@@ -254,12 +254,19 @@ button {
 .hero-section p {
     font-size: 1.4rem;
     /* Aumentado ligeiramente para desktop */
-    margin-bottom: 40px;
+    margin-bottom: 40px;    
+    color: var(--text-color); /* Cor de texto mais escura para legibilidade */
 }
 
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
+/* Botão da Hero Section */
+.hero-section .btn-primary {
+    background-color: var(--secondary-color); /* Fundo roxo */
+    color: var(--white); /* Texto branco */
+}
+
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -1868,14 +1875,14 @@ button {
 
 /* Canvas Background Animation */
 #gasCanvas {
-    position: fixed;
+    position: absolute; /* Alterado de fixed para absolute */
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -100;
-    /* Garante que fique atrás de todo o conteúdo */
-    display: none;
+    width: 100%; /* Ocupa 100% do pai (.hero-section) */
+    height: 100%; /* Ocupa 100% do pai (.hero-section) */
+    z-index: -1;
+    /* Fica atrás do conteúdo da hero-section */
+    display: block;
     background-color: transparent;
     /* Será preenchido pela animação */
 }
