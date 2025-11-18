@@ -225,6 +225,12 @@ button {
     text-align: left;
     max-width: 600px;
     padding-right: 20px; /* Espaçamento para não colar na imagem */
+    background-color: var(--light-gray);
+    margin-bottom: 20px;
+    background-color: var(--light-gray);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .hero-section h1 {
@@ -265,23 +271,7 @@ button {
     font-size: 1.4rem;
     margin-bottom: 40px;    
     color: var(--dark-gray); /* Cor de texto mais escura para legibilidade */
-}
-
-.hero-image {
-    margin: 20px 0; /* Espaçamento no mobile */
-        z-index: -10; /* Garante que a imagem fique atrás do texto */
-
-}
-
-.hero-image img {
-    max-width: 100%;
-    height: auto;
-    position: relative; /* Volta para o fluxo normal */
-    transform: none;
-    flex: 1 1 60%; /* Permite que a imagem ocupe mais espaço */
-    max-width: 800px; /* Define o tamanho máximo da imagem */
-    right: 220px; /* Ajusta a posição da imagem */
-    
+    text-align: justify;
 }
 
 .scroll-indicator {
@@ -457,10 +447,13 @@ button {
 
     .hero-section h1 {
         font-size: 2.8rem;
+        text-align: left;
+        left: 35px;
     }
 
     .hero-section p {
         font-size: 1.1rem;
+        text-align: left;
     }
 
     .main-header .main-nav ul {
@@ -477,14 +470,6 @@ button {
         text-align: center;
         max-width: 100%;
         padding-right: 0; /* Remove o padding da versão desktop */
-    }
-
-    .hero-image img{
-        margin: 30px 0; /* Ajusta o espaçamento vertical no mobile */
-        opacity: 1; /* Garante que a imagem esteja totalmente visível */
-        position: relative; /* Remove o posicionamento absoluto */
-        right: 15px; /* Ajusta a posição da imagem */
-        width: 100%;
     }
 
     .hero-section .overlay {
@@ -510,17 +495,6 @@ button {
 @media (min-width: 993px) {
     .hero-content {
         align-items: flex-start; /* Alinha o texto no topo */
-    }
-
-    .hero-image {
-        position: absolute; /* Tira a imagem do fluxo do texto */
-        top: 50%;
-        left: 100%; /* Começa à direita do container de texto */
-        transform: translateY(-50%);
-        width: 50vw; /* Largura relativa à tela */
-        max-width: 80%; /* Limita a largura máxima */
-        margin: 0;
-        padding-left: 40px; /* Espaçamento entre texto e imagem */
     }
     
 }
@@ -645,6 +619,7 @@ button {
 .about-section .about-text p {
     margin-bottom: 20px;
     font-size: 1.1rem;
+    text-align: justify;
     line-height: 1.8;
 }
 
@@ -729,6 +704,7 @@ button {
 .about-section .card p {
     font-size: 0.95rem;
     line-height: 1.7;
+    text-align: justify;
 }
 
 /* Estilos para o wrapper do vídeo e botão de play */
@@ -995,6 +971,7 @@ button {
     font-size: 0.95rem;
     color: var(--text-color);
     margin-bottom: 20px;
+    text-align: justify;
     line-height: 1.6;
 }
 
@@ -1189,8 +1166,8 @@ button {
 .market-strategy-section .strategy-block p {
     font-size: 1.1rem;
     line-height: 1.8;
-    margin-bottom: 30px;
-    text-align: center;
+    margin-bottom: 30px;    
+    text-align: justify;
     flex-grow: 1;
     /* Faz o parágrafo ocupar o espaço disponível, alinhando os diagramas */
 }
@@ -1281,6 +1258,7 @@ button {
 .ethics-section .card p {
     font-size: 0.95rem;
     line-height: 1.6;
+    text-align: justify;
 }
 
 .ethics-cta {
@@ -1336,6 +1314,7 @@ button {
 .whistleblower-channel p {
     font-size: 1.1rem;
     margin-bottom: 30px;
+    text-align: justify;
 }
 
 .whistleblower-channel .btn-secondary {
@@ -1461,6 +1440,7 @@ button {
 .news-card .news-preview {
     font-size: 0.95rem;
     color: var(--text-color);
+    text-align: justify;
     line-height: 1.6;
     margin-bottom: 20px;
 }
@@ -1586,6 +1566,7 @@ button {
 .contact-info p {
     margin-bottom: 15px;
     font-size: 1.05rem;
+    text-align: justify;
     line-height: 1.6;
 }
 
@@ -1929,7 +1910,7 @@ button {
 .team-modal .modal-bio {
     font-size: 1rem;
     line-height: 1.8;
-    text-align: left;
+    text-align: justify;
     color: var(--text-color);
     white-space: pre-wrap; /* Preserva as quebras de linha do HTML */
 }
