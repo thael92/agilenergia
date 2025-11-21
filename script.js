@@ -153,6 +153,30 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
+    // WhatsApp Modal Functionality
+    const whatsappModal = document.getElementById('whatsappModal');
+    const openWhatsappBtn = document.getElementById('openWhatsappModalBtn');
+
+    if (whatsappModal && openWhatsappBtn) {
+        const closeWhatsappBtn = whatsappModal.querySelector('.close-button');
+
+        const openModal = () => {
+            whatsappModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeModal = () => {
+            whatsappModal.classList.remove('open');
+            document.body.style.overflow = '';
+        };
+
+        openWhatsappBtn.addEventListener('click', openModal);
+        closeWhatsappBtn.addEventListener('click', closeModal);
+        whatsappModal.addEventListener('click', (event) => {
+            if (event.target === whatsappModal) closeModal();
+        });
+    }
+
     // Team member bio modal
     const teamModal = document.getElementById('teamMemberModal');
     if (teamModal) {
