@@ -182,12 +182,14 @@ button {
     height: 100%;
     object-fit: cover;
     z-index: 0;
+    
 }
 
 .hero-section .video-background img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    
 }
 
 .hero-section .video-background video {
@@ -202,7 +204,8 @@ button {
     left: 0;
     width: 100%;
     height: 100%;    
-    z-index: 0; /* Fica entre a imagem de fundo e o texto */
+    background: rgba(0, 0, 0, 0.5); /* Overlay mais escuro para contraste */
+    z-index: 1; /* Fica entre a imagem de fundo e o texto */
 }
 
 .hero-section .hero-content {
@@ -221,21 +224,19 @@ button {
 
 .hero-text {
     position: relative; /* Necessário para o posicionamento da imagem no desktop */
-    flex: 0 1 50%; /* Não cresce, pode encolher, base de 50% */
+    flex: 0 1 60%; /* Aumenta um pouco a base para o texto */
     text-align: left;
-    max-width: 600px;
-    padding-right: 20px; /* Espaçamento para não colar na imagem */
-    background-color: var(--light-gray);
+    max-width: 800px;
+    /* Removemos o fundo para integrar o texto com a imagem */
+    background-color: transparent;
     margin-bottom: 20px;
-    background-color: var(--light-gray);
-    padding: 30px;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: none;
 }
 
 .hero-section h1 {
     font-family: var(--font-heading);
-    font-size: 3.8rem;
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
@@ -243,7 +244,10 @@ button {
     /* Necessário para o cursor */
     display: block;
     min-height: 140px; /* Altura mínima para evitar que a imagem se mova */
+    color: var(--light-gray); /* Texto branco para melhor contraste */
+    font-size: 4.2rem; /* Aumenta um pouco o título */
 }
+
 
 /* Cursor de digitação */
 .hero-section h1.typing::after {
@@ -270,8 +274,7 @@ button {
 .hero-section p {
     font-size: 1.4rem;
     margin-bottom: 40px;    
-    color: var(--dark-gray); /* Cor de texto mais escura para legibilidade */
-    text-align: justify;
+    color: var(--primary-color); /* Branco com leve transparência */
 }
 
 .scroll-indicator {
@@ -474,7 +477,7 @@ button {
 
     .hero-section .overlay {
         /* Adiciona um gradiente para escurecer o fundo e garantir legibilidade */
-        background: none; /* Remove o overlay escuro no mobile */
+        background: rgba(0, 0, 0, 0.6); /* Mantém o overlay no mobile */
     }
 }
 
@@ -487,7 +490,7 @@ button {
     .hero-section p {
         font-size: 1.2rem;
         /* Further reduce font size for tablets */
-        color: var(--dark-gray); /* Garante a cor correta do texto no mobile */
+        color: var(--primary-color); /* Garante a cor correta do texto no mobile */
     }
 }
 
@@ -541,7 +544,7 @@ button {
     font-family: var(--font-heading);
     font-size: 2.8rem;
     font-weight: 700;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     text-align: center;
     margin-bottom: 60px;
     position: relative;
@@ -913,7 +916,7 @@ button {
 
 /* Team Section */
 .team-section {
-    background-color: transparent;
+    background-image: url('img/textura-nosso-diferencial.png');
     /* Fundo transparente */
 }
 
@@ -922,6 +925,7 @@ button {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-bottom: 60px;
+    
 }
 
 .team-member {
@@ -1214,6 +1218,47 @@ button {
     }
 }
 
+/* Unique Approach Section */
+.unique-approach-section {
+    background-image: url('img/textura-nosso-diferencial.png');
+    color: var(--white);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.unique-approach-section .section-title {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.unique-approach-section .section-title::before,
+.unique-approach-section .section-title::after {
+    border-color: var(--primary-color);
+}
+
+.unique-approach-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: var(--secondary-color);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.unique-approach-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: justify;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.unique-approach-content p:not(:last-child) {
+    margin-bottom: 25px;
+}
+
 /* Ethics Section */
 .ethics-section {
     background-color: transparent;
@@ -1388,7 +1433,7 @@ button {
 
 /* News Section */
 .news-section {
-    background-color: transparent;
+    background-image: url('img/textura-nosso-diferencial.png');
     /* Fundo transparente */
 }
 
