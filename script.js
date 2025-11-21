@@ -511,4 +511,66 @@ document.addEventListener('DOMContentLoaded', () => {
     initParticles();
     animate();
 
-});
+    // ===== WHATSAPP CHAT MODAL - FUNCIONALIDADE =====
+    console.log('✅ Inicializando WhatsApp Chat Modal...');
+
+    const openChatBtn = document.getElementById('openChatBtn');
+    const chatModal = document.getElementById('whatsappChatModal');
+    const closeChatBtn = chatModal ? chatModal.querySelector('.chat-close-button') : null;
+
+    // Debug
+    console.log('Elementos encontrados:', {
+        openChatBtn: !!openChatBtn,
+        chatModal: !!chatModal,
+        closeChatBtn: !!closeChatBtn
+    });
+
+    if (!openChatBtn || !chatModal) {
+        console.error('❌ Elementos não encontrados!');
+        return;
+    }
+
+    // 🎯
+    // Remove qualquer event listener anterior
+    const newOpenBtn = openChatBtn.cloneNode(true);
+    openChatBtn.parentNode.replaceChild(newOpenBtn, openChatBtn);
+    openChatBtn = newOpenBtn;
+
+    // ABRE o modal
+    openChatBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('✅ ABRINDO MODAL');
+        chatModal.style.display = 'flex';
+        chatModal.style.visibility = 'visible';
+        chatModal.style.opacity = '1';
+        chatModal.classList.add('open');
+    });
+
+    // FECHA o modal
+    const closeBtn = chatModal.querySelector('[class*="close"], [id*="close"], button:first-child');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('✅ FECHANDO MODAL');
+            chatModal.style.display = 'none';
+            chatModal.style.visibility = 'hidden';
+            chatModal.style.opacity = '0';
+            chatModal.classList.remove('open');
+        });
+    }
+
+    // FECHA ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (chatModal.style.display === 'flex' && 
+            !chatModal.contains(e.target) && 
+            !openChatBtn.contains(e.target)) {
+            console.log('✅ FECHANDO POR CLIQUE FORA');
+            chatModal.style.display = 'none';
+            chatModal.classList.remove('open');
+        }
+    });
+
+    console.log('✨ WhatsApp Modal ativado com sucesso!');
+}); // ← Fecha o DOMContentLoaded principal
