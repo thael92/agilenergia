@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Swiper.js for Carousel -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
 </head>
 
 <body>
@@ -445,61 +448,171 @@ During his 18 years at Petrobras, between 2006 and 2024, he held several strateg
             <div class="container">
                 <h2 class="section-title" data-lang-pt="Notícias & Atualizações" data-lang-en="News & Updates">Notícias
                     & Atualizações</h2>
-                <div class="news-feed">
-                    <div class="news-card animate-on-scroll">
-                        <img src="https://via.placeholder.com/300x200/F5A623/white?text=Notícia+1"
-                            alt="Thumbnail Notícia 1">
-                        <div class="news-content">
-                            <span class="news-date" data-lang-pt="01 de Novembro de 2025"
-                                data-lang-en="November 01, 2025">01 de Novembro de 2025</span>
-                            <h3 class="news-title" data-lang-pt="ÁGIL ENERGIA Anuncia Nova Parceria Estratégica"
-                                data-lang-en="AGIL ENERGIA Announces New Strategic Partnership">ÁGIL ENERGIA Anuncia
-                                Nova Parceria Estratégica</h3>
-                            <p class="news-preview"
-                                data-lang-pt="Detalhes sobre a nova colaboração que impulsionará a expansão no mercado nacional..."
-                                data-lang-en="Details on the new collaboration that will drive expansion in the national market...">
-                                Detalhes sobre a nova colaboração que impulsionará a expansão no mercado nacional...</p>
-                            <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn"
-                                data-lang-en="View on LinkedIn">Ver no LinkedIn</a>
-                            <!-- Placeholder for LinkedIn icon -->
+                <!-- Swiper -->
+                <div class="swiper news-carousel">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/F5A623/white?text=Notícia" alt="Thumbnail Notícia">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="13 de Novembro de 2025" data-lang-en="November 13, 2025">13 de Novembro de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="Ágil Energia tem inscrição aprovada na Oferta Permanente de Concessão da ANP" data-lang-en="Ágil Energia's registration approved in ANP's Permanent Concession Offer">Ágil Energia tem inscrição aprovada na Oferta Permanente de Concessão da ANP</h3>
+                                    <p class="news-preview" data-lang-pt="Um passo importante para a expansão de nossas atividades exploratórias no Brasil..." data-lang-en="An important step towards expanding our exploratory activities in Brazil...">
+                                        Um passo importante para a expansão de nossas atividades exploratórias no Brasil...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/4A1D6E/white?text=Notícia" alt="Thumbnail Notícia">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="27 de Outubro de 2025" data-lang-en="October 27, 2025">27 de Outubro de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="Conheça o site Endura Carbon" data-lang-en="Discover the Endura Carbon website">Conheça o site Endura Carbon</h3>
+                                    <p class="news-preview" data-lang-pt="Explore nossa nova plataforma dedicada a soluções de descarbonização e projetos BECCS..." data-lang-en="Explore our new platform dedicated to decarbonization solutions and BECCS projects...">
+                                        Explore nossa nova plataforma dedicada a soluções de descarbonização e projetos BECCS...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/F5A623/white?text=Notícia" alt="Thumbnail Notícia">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="16 de Outubro de 2025" data-lang-en="October 16, 2025">16 de Outubro de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="Ágil Energia e Aventra Energy lançam o Projeto BECCS Endura" data-lang-en="Ágil Energia and Aventra Energy launch the Endura BECCS Project">Ágil Energia e Aventra Energy lançam o Projeto BECCS Endura</h3>
+                                    <p class="news-preview" data-lang-pt="Uma iniciativa pioneira para captura de carbono com bioenergia, reforçando nosso compromisso com a sustentabilidade..." data-lang-en="A pioneering initiative for carbon capture with bioenergy, reinforcing our commitment to sustainability...">
+                                        Uma iniciativa pioneira para captura de carbono com bioenergia, reforçando nosso compromisso com a sustentabilidade...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/4A1D6E/white?text=Notícia" alt="Thumbnail Notícia">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="25 de Julho de 2025" data-lang-en="July 25, 2025">25 de Julho de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="Ágil Energia: Encarando a Hamming Question do gás natural no Brasil" data-lang-en="Ágil Energia: Facing the Hamming Question for natural gas in Brazil">Ágil Energia: Encarando a Hamming Question do gás natural no Brasil</h3>
+                                    <p class="news-preview" data-lang-pt="Analisamos os desafios fundamentais e as oportunidades que definirão o futuro do setor de gás no país..." data-lang-en="We analyze the fundamental challenges and opportunities that will define the future of the gas sector in the country...">
+                                        Analisamos os desafios fundamentais e as oportunidades que definirão o futuro do setor de gás no país...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 5 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/F5A623/white?text=Notícia" alt="Thumbnail Notícia">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="23 de Julho de 2025" data-lang-en="July 23, 2025">23 de Julho de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="Ágil Energia na Gas&Energy Week 2025" data-lang-en="Ágil Energia at Gas&Energy Week 2025">Ágil Energia na Gas&Energy Week 2025</h3>
+                                    <p class="news-preview" data-lang-pt="Nossa participação no principal evento do setor, compartilhando nossa visão e projetos inovadores..." data-lang-en="Our participation in the main industry event, sharing our vision and innovative projects...">
+                                        Nossa participação no principal evento do setor, compartilhando nossa visão e projetos inovadores...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 6 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/4A1D6E/white?text=Notícia" alt="Thumbnail Notícia">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="10 de Julho de 2025" data-lang-en="July 10, 2025">10 de Julho de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="Parceria que transforma dados em descobertas: Ágil Energia + CImaGeo" data-lang-en="Partnership that turns data into discoveries: Ágil Energia + CImaGeo">Parceria que transforma dados em descobertas: Ágil Energia + CImaGeo</h3>
+                                    <p class="news-preview" data-lang-pt="Unindo forças com especialistas em geofísica para acelerar a identificação de novas reservas de gás..." data-lang-en="Joining forces with geophysics experts to accelerate the identification of new gas reserves...">
+                                        Unindo forças com especialistas em geofísica para acelerar a identificação de novas reservas de gás...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 7 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/F5A623/white?text=Notícia" alt="Thumbnail Notícia">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="09 de Julho de 2025" data-lang-en="July 09, 2025">09 de Julho de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="Exploração onshore mais precisa: como a inovação na aquisição e processamento de dados poderá redefinir o futuro do gás natural no Brasil" data-lang-en="More precise onshore exploration: how innovation in data acquisition and processing could redefine the future of natural gas in Brazil">Exploração onshore mais precisa: como a inovação na aquisição e processamento de dados poderá redefinir o futuro do gás natural no Brasil</h3>
+                                    <p class="news-preview" data-lang-pt="Detalhes sobre as tecnologias que estamos implementando para aumentar a eficiência e reduzir os riscos na exploração..." data-lang-en="Details on the technologies we are implementing to increase efficiency and reduce risks in exploration...">
+                                        Detalhes sobre as tecnologias que estamos implementando para aumentar a eficiência e reduzir os riscos na exploração...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 8 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/007bff/white?text=Nova+Notícia" alt="Thumbnail Nova Notícia">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="02 de Junho de 2025" data-lang-en="June 02, 2025">02 de Junho de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="Hoje nasce a Ágil Energia" data-lang-en="Today, Ágil Energia is Born">Hoje nasce a Ágil Energia</h3>
+                                    <p class="news-preview" data-lang-pt="Com uma abordagem inovadora e integrada, a Ágil Energia surge para capturar as sinergias entre o potencial do gás natural em bacias sedimentares terrestres brasileiras e a nova realidade do mercado. O setor de gás no Brasil passou por uma revolução, e estamos prontos para transformar oportunidades em projetos viáveis e sustentáveis." data-lang-en="With an innovative and integrated approach, Ágil Energia emerges to capture the synergies between the potential of natural gas in Brazilian onshore sedimentary basins and the new market reality. The gas sector in Brazil has undergone a revolution, and we are ready to transform opportunities into viable and sustainable projects.">
+                                        Com uma abordagem inovadora e integrada, a Ágil Energia surge para capturar as sinergias entre o potencial do gás natural em bacias sedimentares terrestres brasileiras e a nova realidade do mercado. O setor de gás no Brasil passou por uma revolução, e estamos prontos para transformar oportunidades em projetos viáveis e sustentáveis.
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 9 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/F5A623/white?text=Notícia+1" alt="Thumbnail Notícia 1">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="01 de Novembro de 2025" data-lang-en="November 01, 2025">01 de Novembro de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="ÁGIL ENERGIA Anuncia Nova Parceria Estratégica" data-lang-en="AGIL ENERGIA Announces New Strategic Partnership">ÁGIL ENERGIA Anuncia Nova Parceria Estratégica</h3>
+                                    <p class="news-preview" data-lang-pt="Detalhes sobre a nova colaboração que impulsionará a expansão no mercado nacional..." data-lang-en="Details on the new collaboration that will drive expansion in the national market...">
+                                        Detalhes sobre a nova colaboração que impulsionará a expansão no mercado nacional...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 10 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/4A1D6E/white?text=Notícia+2" alt="Thumbnail Notícia 2">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="20 de Outubro de 2025" data-lang-en="October 20, 2025">20 de Outubro de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="Investimento em Tecnologia de Exploração Onshore" data-lang-en="Investment in Onshore Exploration Technology">Investimento em Tecnologia de Exploração Onshore</h3>
+                                    <p class="news-preview" data-lang-pt="Saiba mais sobre os avanços tecnológicos que estamos implementando para maior eficiência..." data-lang-en="Learn more about the technological advancements we are implementing for greater efficiency...">
+                                        Saiba mais sobre os avanços tecnológicos que estamos implementando para maior eficiência...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 11 -->
+                        <div class="swiper-slide">
+                            <div class="news-card animate-on-scroll">
+                                <img src="https://via.placeholder.com/400x250/F5A623/white?text=Notícia+3" alt="Thumbnail Notícia 3">
+                                <div class="news-content">
+                                    <span class="news-date" data-lang-pt="05 de Outubro de 2025" data-lang-en="October 05, 2025">05 de Outubro de 2025</span>
+                                    <h3 class="news-title" data-lang-pt="ÁGIL ENERGIA Participa de Fórum Setorial" data-lang-en="AGIL ENERGIA Participates in Industry Forum">ÁGIL ENERGIA Participa de Fórum Setorial</h3>
+                                    <p class="news-preview" data-lang-pt="Nossa equipe compartilha insights sobre o futuro do gás natural no Brasil..." data-lang-en="Our team shares insights on the future of natural gas in Brazil...">
+                                        Nossa equipe compartilha insights sobre o futuro do gás natural no Brasil...
+                                    </p>
+                                    <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn" data-lang-en="View on LinkedIn">Ver no LinkedIn <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="news-card animate-on-scroll">
-                        <img src="https://via.placeholder.com/300x200/4A1D6E/white?text=Notícia+2"
-                            alt="Thumbnail Notícia 2">
-                        <div class="news-content">
-                            <span class="news-date" data-lang-pt="20 de Outubro de 2025"
-                                data-lang-en="October 20, 2025">20 de Outubro de 2025</span>
-                            <h3 class="news-title" data-lang-pt="Investimento em Tecnologia de Exploração Onshore"
-                                data-lang-en="Investment in Onshore Exploration Technology">Investimento em Tecnologia
-                                de Exploração Onshore</h3>
-                            <p class="news-preview"
-                                data-lang-pt="Saiba mais sobre os avanços tecnológicos que estamos implementando para maior eficiência..."
-                                data-lang-en="Learn more about the technological advancements we are implementing for greater efficiency...">
-                                Saiba mais sobre os avanços tecnológicos que estamos implementando para maior
-                                eficiência...</p>
-                            <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn"
-                                data-lang-en="View on LinkedIn">Ver no LinkedIn</a>
-                        </div>
-                    </div>
-                    <div class="news-card animate-on-scroll">
-                        <img src="https://via.placeholder.com/300x200/F5A623/white?text=Notícia+3"
-                            alt="Thumbnail Notícia 3">
-                        <div class="news-content">
-                            <span class="news-date" data-lang-pt="05 de Outubro de 2025"
-                                data-lang-en="October 05, 2025">05 de Outubro de 2025</span>
-                            <h3 class="news-title" data-lang-pt="ÁGIL ENERGIA Participa de Fórum Setorial"
-                                data-lang-en="AGIL ENERGIA Participates in Industry Forum">ÁGIL ENERGIA Participa de
-                                Fórum Setorial</h3>
-                            <p class="news-preview"
-                                data-lang-pt="Nossa equipe compartilha insights sobre o futuro do gás natural no Brasil..."
-                                data-lang-en="Our team shares insights on the future of natural gas in Brazil...">Nossa
-                                equipe compartilha insights sobre o futuro do gás natural no Brasil...</p>
-                            <a href="#" target="_blank" class="read-more-link" data-lang-pt="Ver no LinkedIn"
-                                data-lang-en="View on LinkedIn">Ver no LinkedIn</a>
-                        </div>
-                    </div>
+                    <!-- Adicione mais .swiper-slide conforme necessário -->
                 </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Navigation -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
         </section>
 
@@ -658,6 +771,25 @@ During his 18 years at Petrobras, between 2006 and 2024, he held several strateg
         </div>
     </div>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var swiper = new Swiper('.news-carousel', {
+                // Parâmetros do Swiper
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 
