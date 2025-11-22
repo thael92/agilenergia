@@ -395,182 +395,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --- Canvas Gas Animation --- */
-    const canvas = document.getElementById('gasCanvas');
-    const ctx = canvas.getContext('2d');
-
-    // Verifica a preferência por modo escuro
-    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    let particles = [];
-    const numParticles = 80; // Número de partículas
-    const particleRadius = 1.5; // Raio das partículas
-    const maxLineDistance = 120; // Distância máxima para conectar partículas
-    const flowSpeed = 0.5; // Velocidade de fluxo das partículas
-
-    // Define as cores com base no tema (claro ou escuro)
-    const colors = prefersDarkMode ? [
-        'rgba(245, 166, 35, 0.8)', // Laranja (mais opaco para dark mode)
-        'rgba(170, 100, 220, 0.8)'  // Roxo mais claro e vibrante para dark mode
-    ] : [
-        'rgba(245, 166, 35, 0.7)', // Laranja para light mode
-        'rgba(74, 29, 110, 0.7)'   // Roxo para light mode
-    ];
-
-    // Função para redimensionar o canvas
-    const resizeCanvas = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    };
-
-    // Classe para representar uma partícula
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.vx = (Math.random() - 0.5) * flowSpeed; // Velocidade em X
-            this.vy = (Math.random() - 0.5) * flowSpeed; // Velocidade em Y
-            this.radius = particleRadius + Math.random() * 1.5;
-            this.color = colors[Math.floor(Math.random() * colors.length)];
-            this.opacity = 0.5 + Math.random() * 0.5; // Opacidade translúcida
-        }
-
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-
-            // Faz a partícula reaparecer do lado oposto se sair da tela
-            if (this.x < -this.radius) this.x = canvas.width + this.radius;
-            if (this.x > canvas.width + this.radius) this.x = -this.radius;
-            if (this.y < -this.radius) this.y = canvas.height + this.radius;
-            if (this.y > canvas.height + this.radius) this.y = -this.radius;
-        }
-
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = this.color.replace(/[^,]+(?=\))/, this.opacity.toFixed(1)); // Ajusta opacidade dinamicamente
-            ctx.shadowBlur = 10; // Brilho suave
-            ctx.shadowColor = this.color.replace(/[^,]+(?=\))/, '1'); // Cor do brilho
-            ctx.fill();
-            ctx.shadowBlur = 0; // Reseta o brilho para não afetar outros desenhos
-        }
-    }
-
-    // Inicializa as partículas
-    const initParticles = () => {
-        particles = []; // Limpa partículas existentes
-        for (let i = 0; i < numParticles; i++) {
-            particles.push(new Particle());
-        }
-    };
-
-    // Função para desenhar linhas entre partículas próximas
-    const drawLines = () => {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const p1 = particles[i];
-                const p2 = particles[j];
-                const distance = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
-
-                if (distance < maxLineDistance) {
-                    ctx.beginPath();
-                    ctx.moveTo(p1.x, p1.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.lineWidth = 0.5; // Linhas sutis
-                    ctx.strokeStyle = prefersDarkMode ? `rgba(255, 255, 255, ${(1 - distance / maxLineDistance) * 0.15})` : `rgba(100, 100, 100, ${(1 - distance / maxLineDistance) * 0.5})`;
-                    ctx.stroke();
-                }
-            }
-        }
-    };
-
-    // Loop de animação
-    const animate = () => {
-        requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
-
-        // Desenha as linhas primeiro
-        drawLines();
-
-        // Atualiza e desenha as partículas
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-    };
-
-    // Event Listeners
-    window.addEventListener('resize', () => {
-        resizeCanvas();
-        initParticles(); // Re-inicializa partículas para se ajustar ao novo tamanho
-    });
-
-    // Inicializa e começa a animação
-    resizeCanvas();
-    initParticles();
-    animate();
-
     // ===== WHATSAPP CHAT MODAL - FUNCIONALIDADE =====
-    console.log('✅ Inicializando WhatsApp Chat Modal...');
 
-    const openChatBtn = document.getElementById('openChatBtn');
+    let openChatBtn = document.getElementById('openChatBtn');
     const chatModal = document.getElementById('whatsappChatModal');
     const closeChatBtn = chatModal ? chatModal.querySelector('.chat-close-button') : null;
 
-    // Debug
-    console.log('Elementos encontrados:', {
-        openChatBtn: !!openChatBtn,
-        chatModal: !!chatModal,
-        closeChatBtn: !!closeChatBtn
-    });
+    
 
     if (!openChatBtn || !chatModal) {
         console.error('❌ Elementos não encontrados!');
         return;
     }
 
-    // 🎯
-    // Remove qualquer event listener anterior
-    const newOpenBtn = openChatBtn.cloneNode(true);
-    openChatBtn.parentNode.replaceChild(newOpenBtn, openChatBtn);
-    openChatBtn = newOpenBtn;
-
-    // ABRE o modal
+    // ABRE o modal ao clicar no botão flutuante
     openChatBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('✅ ABRINDO MODAL');
-        chatModal.style.display = 'flex';
-        chatModal.style.visibility = 'visible';
-        chatModal.style.opacity = '1';
         chatModal.classList.add('open');
     });
 
-    // FECHA o modal
-    const closeBtn = chatModal.querySelector('[class*="close"], [id*="close"], button:first-child');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
+    // FECHA o modal ao clicar no botão X
+    if (closeChatBtn) {
+        closeChatBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('✅ FECHANDO MODAL');
-            chatModal.style.display = 'none';
-            chatModal.style.visibility = 'hidden';
-            chatModal.style.opacity = '0';
             chatModal.classList.remove('open');
         });
     }
 
-    // FECHA ao clicar fora
+    // FECHA ao clicar fora do modal
     document.addEventListener('click', (e) => {
-        if (chatModal.style.display === 'flex' && 
+        if (chatModal.classList.contains('open') && 
             !chatModal.contains(e.target) && 
             !openChatBtn.contains(e.target)) {
-            console.log('✅ FECHANDO POR CLIQUE FORA');
-            chatModal.style.display = 'none';
             chatModal.classList.remove('open');
         }
     });
 
-    console.log('✨ WhatsApp Modal ativado com sucesso!');
+
 }); // ← Fecha o DOMContentLoaded principal
