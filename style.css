@@ -1439,11 +1439,17 @@ button {
     /* Fundo transparente */
 }
 
+.news-feed {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
 .news-card {
     background-color: #fdfaf4; /* Cor de papel de jornal */
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #e0e0e0;
     display: flex;
@@ -1453,14 +1459,13 @@ button {
 
 .news-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .news-card img {
     width: 100%;
-    height: auto; /* Altura da imagem reduzida */
+    height: auto;
     object-fit: cover;
-    filter: grayscale(50%) contrast(1.1); /* Efeito de foto de jornal */
     transition: filter 0.4s ease;
 }
 
@@ -1469,7 +1474,7 @@ button {
 }
 
 .news-card .news-content {
-    padding: 20px; /* Padding reduzido */
+    padding: 20px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -1480,13 +1485,13 @@ button {
     font-size: 0.9rem;
     color: #888;
     margin-bottom: 10px;
-    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada para data */
+    font-family: 'Courier New', Courier, monospace;
     text-transform: uppercase;
 }
 
 .news-card .news-title {
-    font-family: "Times New Roman", Times, serif; /* Fonte de jornal */
-    font-size: 1.3rem; /* Tamanho do título reduzido */
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--secondary-color);
     margin-bottom: 15px;
@@ -1495,11 +1500,11 @@ button {
 }
 
 .news-card .news-preview {
-    font-size: 0.9rem; /* Tamanho da prévia reduzido */
+    font-size: 0.9rem;
     color: var(--text-color);
     text-align: justify;
     line-height: 1.7;
-    margin-bottom: 15px; /* Margem reduzida */
+    margin-bottom: 15px;
     border-left: 3px solid var(--primary-color);
     padding-left: 15px;
 }
@@ -1509,7 +1514,7 @@ button {
     color: var(--primary-color);
     font-weight: 600;
     transition: all 0.3s ease;
-    align-self: flex-start; /* Alinha o botão à esquerda */
+    align-self: flex-start;
 }
 
 .news-card .read-more-link i {
@@ -1526,48 +1531,10 @@ button {
     transform: translateX(3px);
 }
 
-/* Swiper Carousel Styles */
-.news-carousel {
-    width: 100%;
-    padding-bottom: 50px; /* Espaço para paginação */
-}
-
-/* Ajuste para o efeito coverflow */
-.news-carousel .swiper-slide {
-    width: 320px; /* Largura fixa para cada slide */
-    height: auto;
-}
-
-.swiper-pagination-bullet {
-    background-color: var(--secondary-color);
-    opacity: 0.5;
-}
-
-.swiper-pagination-bullet-active {
-    background-color: var(--primary-color);
-    opacity: 1;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    color: var(--secondary-color);
-    transition: color 0.3s ease;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-    color: var(--primary-color);
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-    font-size: 2rem; /* Tamanho das setas */
-}
-
 /* Media Queries for News Section */
 @media (max-width: 768px) {
-    .news-carousel .swiper-slide {
-        width: 80%; /* Slides mais largos em telas menores */
+    .news-feed {
+        grid-template-columns: 1fr;
     }
 
     .news-card .news-content {
@@ -1585,16 +1552,11 @@ button {
 
 @media (max-width: 576px) {
     .news-card img {
-        height: 151px;
+        height: 150px;
     }
 
     .news-card .news-content {
         padding: 15px;
-    }
-
-    .swiper-button-next,
-    .swiper-button-prev {
-        display: none; /* Oculta as setas em telas muito pequenas */
     }
 }
 
